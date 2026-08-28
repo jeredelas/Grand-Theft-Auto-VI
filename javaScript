@@ -1,922 +1,253 @@
-/* =========================================================
-   1. VARIÁVEIS GLOW & PALETA NEON
-   ========================================================= */
-:root {
-    --bg-profundo: #040109;
-    --bg-card: rgba(15, 6, 28, 0.8);
-    --bg-card-hover: rgba(28, 11, 51, 0.9);
-    --rosa-neon: #ff007f;
-    --azul-neon: #00f0ff;
-    --laranja-neon: #ff5500;
-    --roxo-neon: #9d00ff;
-    --texto-brancao: #ffffff;
-    --texto-suave: #cfc2e5;
-    --fonte-titulo: 'Orbitron', sans-serif;
-    --fonte-corpo: 'Rajdhani', sans-serif;
-}
-
-/* =========================================================
-   2. RESET & EFEITO SCANLINE CRT
-   ========================================================= */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body::before {
-    content: " ";
-    display: block;
-    position: fixed;
-    top: 0; left: 0; bottom: 0; right: 0;
-    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
-                linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
-    z-index: 2500;
-    background-size: 100% 3px, 6px 100%;
-    pointer-events: none;
-}
-
-#barra-progresso {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 4px;
-    background: linear-gradient(90deg, var(--rosa-neon), var(--azul-neon), var(--laranja-neon));
-    width: 0%;
-    z-index: 3000;
-    box-shadow: 0 0 10px var(--azul-neon);
-}
-
-::-webkit-scrollbar {
-    width: 10px;
-}
-::-webkit-scrollbar-track {
-    background: var(--bg-profundo);
-}
-::-webkit-scrollbar-thumb {
-    background: linear-gradient(180deg, var(--rosa-neon), var(--azul-neon));
-    border-radius: 5px;
-}
-
-html {
-    scroll-behavior: smooth;
-}
-
-body {
-    background-color: var(--bg-profundo);
-    color: var(--texto-brancao);
-    font-family: var(--fonte-corpo);
-    font-size: 19px;
-    line-height: 1.5;
-    overflow-x: hidden;
-}
-
-.linha-neon-topo {
-    height: 3px;
-    width: 100%;
-    background: linear-gradient(90deg, var(--rosa-neon), var(--azul-neon), var(--laranja-neon));
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 2000;
-}
-
-/* =========================================================
-   3. CABEÇALHO HUD
-   ========================================================= */
-.cabecalho {
-    position: fixed;
-    top: 4px;
-    left: 0;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 40px;
-    background: rgba(4, 1, 9, 0.88);
-    backdrop-filter: blur(16px);
-    border-bottom: 1px solid rgba(255, 0, 127, 0.3);
-    z-index: 1000;
-}
-
-.logo {
-    font-family: var(--fonte-titulo);
-    font-size: 24px;
-    font-weight: 900;
-    letter-spacing: 2px;
-}
-
-.logo span {
-    color: var(--rosa-neon);
-    text-shadow: 0 0 10px var(--rosa-neon);
-}
-
-.logo small {
-    color: var(--azul-neon);
-    font-size: 14px;
-    margin-left: 5px;
-}
-
-.menu-navegacao {
-    display: flex;
-    list-style: none;
-    gap: 22px;
-}
-
-.menu-navegacao a {
-    color: var(--texto-suave);
-    text-decoration: none;
-    font-size: 15px;
-    font-weight: 700;
-    text-transform: uppercase;
-    transition: all 0.3s ease;
-}
-
-.menu-navegacao a:hover {
-    color: var(--azul-neon);
-    text-shadow: 0 0 10px var(--azul-neon);
-}
-
-.acoes-header {
-    display: flex;
-    gap: 12px;
-    align-items: center;
-}
-
-.botao-nav-glow {
-    background: transparent;
-    color: var(--rosa-neon);
-    border: 2px solid var(--rosa-neon);
-    padding: 8px 18px;
-    border-radius: 25px;
-    font-family: var(--fonte-titulo);
-    font-size: 12px;
-    font-weight: 700;
-    text-decoration: none;
-    text-transform: uppercase;
-    transition: all 0.3s ease;
-    box-shadow: 0 0 10px rgba(255, 0, 127, 0.2);
-    cursor: pointer;
-}
-
-.btn-audio-header {
-    color: var(--azul-neon);
-    border-color: var(--azul-neon);
-    box-shadow: 0 0 10px rgba(0, 240, 255, 0.2);
-}
-
-.botao-nav-glow:hover {
-    background: var(--rosa-neon);
-    color: #fff;
-    box-shadow: 0 0 20px var(--rosa-neon);
-    transform: scale(1.05);
-}
-
-/* =========================================================
-   4. HERO SECAO PARALLAX & EFEITO GLITCH
-   ========================================================= */
-.secao-hero {
-    position: relative;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 140px 20px 80px;
-    background: linear-gradient(180deg, rgba(4,1,9,0.3) 0%, var(--bg-profundo) 100%),
-                url('https://www.europanet.com.br/image_gen/resizeimg.php?cod_produto=6001704') center/cover no-repeat fixed;
-}
-
-.mascara-fundo {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle, rgba(0, 240, 255, 0.05) 0%, rgba(4, 1, 9, 0.8) 100%);
-    z-index: 1;
-}
-
-.conteudo-hero {
-    max-width: 900px;
-    z-index: 2;
-}
-
-.badge-status {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    background: rgba(0, 240, 255, 0.1);
-    border: 1px solid var(--azul-neon);
-    color: var(--azul-neon);
-    padding: 8px 20px;
-    border-radius: 30px;
-    font-family: var(--fonte-titulo);
-    font-size: 13px;
-    font-weight: 700;
-    margin-bottom: 25px;
-    text-transform: uppercase;
-}
-
-.ponto-vivo {
-    width: 8px;
-    height: 8px;
-    background-color: var(--rosa-neon);
-    border-radius: 50%;
-    box-shadow: 0 0 10px var(--rosa-neon);
-    animation: pulsar 1.5s infinite;
-}
-
-@keyframes pulsar {
-    0% { transform: scale(0.9); opacity: 0.7; }
-    50% { transform: scale(1.3); opacity: 1; }
-    100% { transform: scale(0.9); opacity: 0.7; }
-}
-
-.titulo-surreal {
-    font-family: var(--fonte-titulo);
-    font-size: 56px;
-    font-weight: 900;
-    line-height: 1.05;
-    margin-bottom: 20px;
-    position: relative;
-    animation: glitch 3s infinite;
-}
-
-@keyframes glitch {
-    0% { text-shadow: 2px 0 0 var(--rosa-neon), -2px 0 0 var(--azul-neon); }
-    95% { text-shadow: 2px 0 0 var(--rosa-neon), -2px 0 0 var(--azul-neon); }
-    96% { text-shadow: -4px 0 0 var(--rosa-neon), 4px 0 0 var(--azul-neon); }
-    97% { text-shadow: 4px 0 0 var(--rosa-neon), -4px 0 0 var(--azul-neon); }
-    98% { text-shadow: 0 0 0 transparent; }
-    100% { text-shadow: 2px 0 0 var(--rosa-neon), -2px 0 0 var(--azul-neon); }
-}
-
-.texto-gradiente-neon {
-    display: block;
-    background: linear-gradient(90deg, var(--rosa-neon), var(--azul-neon), var(--laranja-neon));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    filter: drop-shadow(0 0 25px var(--rosa-neon));
-}
-
-.subtitulo-hero {
-    font-size: 21px;
-    color: var(--texto-suave);
-    margin-bottom: 40px;
-    max-width: 780px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.botoes-hero {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    flex-wrap: wrap;
-}
-
-.btn-surreal {
-    padding: 16px 36px;
-    border-radius: 40px;
-    font-family: var(--fonte-titulo);
-    font-size: 14px;
-    font-weight: 700;
-    text-decoration: none;
-    text-transform: uppercase;
-    transition: all 0.3s ease;
-    cursor: pointer;
-    border: none;
-}
-
-.btn-rosa {
-    background: linear-gradient(45deg, var(--rosa-neon), var(--roxo-neon));
-    color: #fff;
-    box-shadow: 0 0 25px rgba(255, 0, 127, 0.5);
-}
-
-.btn-rosa:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 0 35px var(--rosa-neon), 0 0 50px var(--azul-neon);
-    filter: brightness(1.2);
-}
-
-.btn-ciano {
-    background: transparent;
-    color: var(--azul-neon);
-    border: 2px solid var(--azul-neon);
-    box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
-}
-
-.btn-ciano:hover {
-    background: var(--azul-neon);
-    color: var(--bg-profundo);
-    box-shadow: 0 0 30px var(--azul-neon);
-    transform: translateY(-4px);
-}
-
-/* =========================================================
-   5. WIDGET RADIO VICE CITY
-   ========================================================= */
-.widget-radio {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background: rgba(15, 6, 28, 0.95);
-    border: 1px solid var(--azul-neon);
-    border-radius: 16px;
-    padding: 12px 18px;
-    box-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
-    backdrop-filter: blur(10px);
-    z-index: 1500;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.radio-header {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-family: var(--fonte-titulo);
-    font-size: 13px;
-    color: var(--rosa-neon);
-}
-
-.radio-controles {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-}
-
-.btn-radio-ctrl {
-    background: transparent;
-    border: 1px solid var(--azul-neon);
-    color: var(--azul-neon);
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.btn-radio-ctrl:hover, .btn-radio-ctrl.ativo {
-    background: var(--azul-neon);
-    color: var(--bg-profundo);
-    box-shadow: 0 0 10px var(--azul-neon);
-}
-
-.radio-status {
-    font-size: 12px;
-    color: var(--texto-suave);
-    text-align: center;
-}
-
-/* =========================================================
-   6. SEÇÃO CONTAGEM REGRESSIVA
-   ========================================================= */
-.bg-contagem {
-    background: linear-gradient(180deg, var(--bg-profundo) 0%, rgba(15, 6, 28, 0.9) 50%, var(--bg-profundo) 100%);
-}
-
-.descricao-subtitulo {
-    color: var(--texto-suave);
-    font-size: 18px;
-    margin-top: 5px;
-}
-
-.grid-contador {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: 20px;
-    max-width: 800px;
-    margin: 30px auto 0;
-}
-
-.bloco-contador {
-    background: rgba(20, 8, 38, 0.85);
-    border: 2px solid var(--rosa-neon);
-    border-radius: 20px;
-    padding: 25px 15px;
-    text-align: center;
-    box-shadow: 0 0 20px rgba(255, 0, 127, 0.2);
-    transition: transform 0.3s ease;
-}
-
-.bloco-contador:hover {
-    transform: translateY(-5px);
-    border-color: var(--azul-neon);
-    box-shadow: 0 0 25px var(--azul-neon);
-}
-
-.numero-contador {
-    display: block;
-    font-family: var(--fonte-titulo);
-    font-size: 48px;
-    font-weight: 900;
-    color: #fff;
-    text-shadow: 0 0 15px var(--rosa-neon);
-}
-
-.rotulo-contador {
-    font-family: var(--fonte-titulo);
-    font-size: 13px;
-    color: var(--azul-neon);
-    text-transform: uppercase;
-    letter-spacing: 2px;
-}
-
-/* =========================================================
-   7. FAIXA DE ESTATÍSTICAS
-   ========================================================= */
-.faixa-estatisticas {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    background: rgba(15, 6, 28, 0.95);
-    border-top: 1px solid rgba(0, 240, 255, 0.3);
-    border-bottom: 1px solid rgba(0, 240, 255, 0.3);
-    padding: 25px 20px;
-    flex-wrap: wrap;
-    gap: 20px;
-}
-
-.item-faixa {
-    text-align: center;
-}
-
-.valor-faixa {
-    display: block;
-    font-family: var(--fonte-titulo);
-    font-size: 28px;
-    color: var(--azul-neon);
-    text-shadow: 0 0 10px var(--azul-neon);
-}
-
-.rotulo-faixa {
-    font-size: 14px;
-    color: var(--texto-suave);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-/* =========================================================
-   8. SEÇÕES E CARDS
-   ========================================================= */
-.secao-padrao {
-    padding: 90px 20px;
-}
-
-.bg-escuro {
-    background-color: rgba(8, 3, 18, 0.7);
-}
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.categoria-tag {
-    color: var(--rosa-neon);
-    font-family: var(--fonte-titulo);
-    font-size: 13px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    display: block;
-    margin-bottom: 8px;
-}
-
-.titulo-secao-esquerda {
-    font-family: var(--fonte-titulo);
-    font-size: 36px;
-    color: #fff;
-    margin-bottom: 20px;
-}
-
-.cabecalho-central {
-    text-align: center;
-    margin-bottom: 50px;
-}
-
-.titulo-secao-centro {
-    font-family: var(--fonte-titulo);
-    font-size: 38px;
-    color: #fff;
-    text-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
-}
-
-.cartao-surreal {
-    background: var(--bg-card);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 0, 127, 0.3);
-    border-radius: 24px;
-    padding: 40px;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
-}
-
-.grid-2-colunas {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
-    align-items: center;
-}
-
-.texto-descricao {
-    color: var(--texto-suave);
-    margin-bottom: 18px;
-    text-align: justify;
-}
-
-.moldura-imagem-neon {
-    border-radius: 18px;
-    overflow: hidden;
-    border: 2px solid var(--azul-neon);
-    box-shadow: 0 0 25px rgba(0, 240, 255, 0.3);
-}
-
-.img-ampliavel {
-    cursor: pointer;
-    transition: transform 0.4s ease;
-}
-
-.img-efeito-zoom {
-    width: 100%;
-    display: block;
-}
-
-.img-ampliavel:hover {
-    transform: scale(1.05);
-}
-
-/* =========================================================
-   9. PROTAGONISTAS & CARDS
-   ========================================================= */
-.grid-cards-duplo {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 30px;
-}
-
-.card-personagem-surreal {
-    background: var(--bg-card);
-    border-radius: 20px;
-    overflow: hidden;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    transition: all 0.4s ease;
-}
-
-.card-personagem-surreal:hover {
-    transform: translateY(-10px);
-    border-color: var(--rosa-neon);
-    box-shadow: 0 15px 30px rgba(255, 0, 127, 0.3);
-}
-
-.card-imagem {
-    position: relative;
-    height: 320px;
-}
-
-.card-imagem img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.overlay-gradiente {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 60%;
-    background: linear-gradient(transparent, var(--bg-profundo));
-}
-
-.card-conteudo {
-    padding: 25px;
-}
-
-.tag-personagem {
-    display: inline-block;
-    padding: 4px 12px;
-    border-radius: 15px;
-    font-family: var(--fonte-titulo);
-    font-size: 11px;
-    font-weight: 700;
-    margin-bottom: 10px;
-    text-transform: uppercase;
-}
-
-.tag-personagem.rosa {
-    background: rgba(255, 0, 127, 0.2);
-    color: var(--rosa-neon);
-    border: 1px solid var(--rosa-neon);
-}
-
-.tag-personagem.ciano {
-    background: rgba(0, 240, 255, 0.2);
-    color: var(--azul-neon);
-    border: 1px solid var(--azul-neon);
-}
-
-.card-conteudo h3 {
-    font-family: var(--fonte-titulo);
-    font-size: 26px;
-    color: #fff;
-    margin-bottom: 10px;
-}
-
-.card-conteudo p {
-    color: var(--texto-suave);
-    font-size: 16px;
-}
-
-/* =========================================================
-   10. REGIÕES DE LEONIDA
-   ========================================================= */
-.grid-regioes {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 25px;
-}
-
-.card-regiao {
-    background: var(--bg-card);
-    border: 1px solid rgba(0, 240, 255, 0.2);
-    border-radius: 18px;
-    overflow: hidden;
-    transition: all 0.3s ease;
-}
-
-.card-regiao:hover {
-    background: var(--bg-card-hover);
-    border-color: var(--azul-neon);
-    transform: translateY(-6px);
-    box-shadow: 0 10px 25px rgba(0, 240, 255, 0.25);
-}
-
-.img-card-regiao {
-    height: 170px;
-    overflow: hidden;
-}
-
-.img-card-regiao img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.conteudo-card-regiao {
-    padding: 20px;
-}
-
-.card-regiao h3 {
-    font-family: var(--fonte-titulo);
-    font-size: 20px;
-    color: var(--rosa-neon);
-    margin-bottom: 8px;
-}
-
-.card-regiao p {
-    color: var(--texto-suave);
-    font-size: 15px;
-}
-
-/* =========================================================
-   11. RECURSOS TÉCNICOS & FORM VIP
-   ========================================================= */
-.grid-3-colunas {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-}
-
-.card-tecnologia {
-    background: var(--bg-card);
-    border: 1px solid rgba(255, 0, 127, 0.2);
-    border-radius: 20px;
-    padding: 35px 25px;
-    position: relative;
-    transition: all 0.3s ease;
-}
-
-.card-tecnologia:hover {
-    border-color: var(--rosa-neon);
-    box-shadow: 0 10px 30px rgba(255, 0, 127, 0.25);
-}
-
-.badge-numero {
-    font-family: var(--fonte-titulo);
-    font-size: 32px;
-    font-weight: 900;
-    color: var(--azul-neon);
-    margin-bottom: 15px;
-}
-
-.card-tecnologia h3 {
-    font-family: var(--fonte-titulo);
-    font-size: 20px;
-    color: #fff;
-    margin-bottom: 12px;
-}
-
-.card-tecnologia p {
-    color: var(--texto-suave);
-    font-size: 16px;
-}
-
-.caixa-vip {
-    text-align: center;
-    max-width: 700px;
-    margin: 0 auto;
-}
-
-.caixa-vip h2 {
-    font-family: var(--fonte-titulo);
-    font-size: 32px;
-    margin-bottom: 10px;
-}
-
-.formulario-vip {
-    display: flex;
-    gap: 15px;
-    margin-top: 25px;
-    justify-content: center;
-    flex-wrap: wrap;
-}
-
-.formulario-vip input {
-    padding: 15px 25px;
-    border-radius: 30px;
-    border: 1px solid var(--azul-neon);
-    background: rgba(4, 1, 9, 0.8);
-    color: #fff;
-    font-family: var(--fonte-corpo);
-    font-size: 16px;
-    outline: none;
-    flex: 1;
-    min-width: 250px;
-}
-
-.mensagem-sucesso {
-    margin-top: 15px;
-    color: var(--azul-neon);
-    font-family: var(--fonte-titulo);
-    font-size: 14px;
-}
-
-/* =========================================================
-   12. GALERIA & LIGHTBOX MODAL
-   ========================================================= */
-.grade-galeria-expandida {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 20px;
-}
-
-.item-galeria-grande, .item-galeria-card {
-    position: relative;
-    border-radius: 16px;
-    overflow: hidden;
-    border: 1px solid rgba(255, 0, 127, 0.3);
-}
-
-.item-galeria-grande {
-    grid-column: span 2;
-}
-
-.item-galeria-grande img, .item-galeria-card img {
-    width: 100%;
-    height: 320px;
-    object-fit: cover;
-    display: block;
-}
-
-.legenda-imagem {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    padding: 20px;
-    background: linear-gradient(transparent, rgba(4, 1, 9, 0.95));
-    pointer-events: none;
-}
-
-.legenda-imagem h4 {
-    font-family: var(--fonte-titulo);
-    font-size: 18px;
-    color: var(--azul-neon);
-}
-
-.legenda-imagem p {
-    font-size: 13px;
-    color: var(--texto-suave);
-}
-
-.modal-lightbox {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(4, 1, 9, 0.95);
-    z-index: 4000;
-    justify-content: center;
-    align-items: center;
-    backdrop-filter: blur(10px);
-}
-
-.conteudo-modal {
-    max-width: 85%;
-    max-height: 85%;
-    border-radius: 12px;
-    border: 2px solid var(--rosa-neon);
-    box-shadow: 0 0 35px var(--rosa-neon);
-}
-
-.fechar-modal {
-    position: absolute;
-    top: 25px;
-    right: 35px;
-    color: #fff;
-    font-size: 40px;
-    cursor: pointer;
-}
-
-/* =========================================================
-   13. TRAILER E RODAPÉ
-   ========================================================= */
-.moldura-video-surreal {
-    background: var(--bg-card);
-    padding: 15px;
-    border-radius: 24px;
-    border: 2px solid var(--rosa-neon);
-    box-shadow: 0 0 35px rgba(255, 0, 127, 0.3);
-}
-
-.container-video {
-    position: relative;
-    padding-bottom: 56.25%;
-    height: 0;
-    overflow: hidden;
-    border-radius: 16px;
-}
-
-.container-video iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border: 0;
-}
-
-.rodape-futurista {
-    background: #020005;
-    padding: 40px 20px;
-    border-top: 1px solid rgba(255, 0, 127, 0.3);
-    text-align: center;
-}
-
-.rodape-logo {
-    font-family: var(--fonte-titulo);
-    font-size: 22px;
-    margin-bottom: 10px;
-}
-
-.rodape-logo span {
-    color: var(--rosa-neon);
-}
-
-.rodape-logo strong {
-    color: var(--azul-neon);
-}
-
-.rodape-conteudo p {
-    color: var(--texto-suave);
-    font-size: 14px;
-}
-
-/* =========================================================
-   14. RESPONSIVIDADE
-   ========================================================= */
-@media (max-width: 900px) {
-    .grid-2-colunas, .item-galeria-grande {
-        grid-column: span 1;
-        grid-template-columns: 1fr;
+// =========================================================
+// SINTETIZADOR DE ÁUDIO WEB (SIRENES, BEEP & AMBIÊNCIA)
+// =========================================================
+
+let audioCtx = null;
+let oscSiren = null;
+let oscLfo = null;
+let gainSiren = null;
+let oscAmbient = null;
+let gainAmbient = null;
+let somAtivo = false;
+
+// Função para garantir que o AudioContext seja criado e ativado corretamente
+function obterAudioContext() {
+    if (!audioCtx) {
+        const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+        if (AudioContextClass) {
+            audioCtx = new AudioContextClass();
+        }
     }
-    
-    .titulo-surreal {
-        font-size: 38px;
+    if (audioCtx && audioCtx.state === 'suspended') {
+        audioCtx.resume();
     }
-    
-    .menu-navegacao {
-        display: none;
+    return audioCtx;
+}
+
+// Destrava o sistema de som do navegador no primeiro clique do usuário na página
+function destravarAudio() {
+    obterAudioContext();
+    document.removeEventListener('click', destravarAudio);
+    document.removeEventListener('touchstart', destravarAudio);
+}
+document.addEventListener('click', destravarAudio);
+document.addEventListener('touchstart', destravarAudio);
+
+// 1. Liga / Desliga o Som da Sirene e Ambiência Synthwave
+function alternarSomAmbiente() {
+    const ctx = obterAudioContext();
+
+    if (!ctx) {
+        alert("Seu navegador não suporta Web Audio API.");
+        return;
     }
 
-    .widget-radio {
-        bottom: 10px;
-        right: 10px;
-        padding: 8px 12px;
+    if (!somAtivo) {
+        try {
+            // --- A) SIRENE POLICIAL (Oscilador com Variação LFO) ---
+            oscSiren = ctx.createOscillator();
+            oscLfo = ctx.createOscillator();
+            gainSiren = ctx.createGain();
+            let lfoGain = ctx.createGain();
+
+            oscSiren.type = 'sawtooth';
+            oscSiren.frequency.value = 700; // Frequência audível da sirene
+
+            oscLfo.type = 'sine';
+            oscLfo.frequency.value = 0.4; // Velocidade da oscilação da sirene
+            lfoGain.gain.value = 300; // Oscila entre 400Hz e 1000Hz
+
+            oscLfo.connect(lfoGain);
+            lfoGain.connect(oscSiren.frequency);
+
+            gainSiren.gain.value = 0.15; // Volume AUMENTADO (antes era 0.04)
+
+            oscSiren.connect(gainSiren);
+            gainSiren.connect(ctx.destination);
+
+            oscSiren.start();
+            oscLfo.start();
+
+            // --- B) GRAVE SYNTHWAVE DE FUNDO ---
+            oscAmbient = ctx.createOscillator();
+            gainAmbient = ctx.createGain();
+
+            oscAmbient.type = 'sawtooth';
+            oscAmbient.frequency.value = 65; // Nota grave perceptível
+            gainAmbient.gain.value = 0.10;
+
+            // Filtro Lowpass para deixar o grave aveludado e retrô
+            let filtro = ctx.createBiquadFilter();
+            filtro.type = 'lowpass';
+            filtro.frequency.value = 250;
+
+            oscAmbient.connect(filtro);
+            filtro.connect(gainAmbient);
+            gainAmbient.connect(ctx.destination);
+
+            oscAmbient.start();
+
+            somAtivo = true;
+
+            // Atualiza visual do botão
+            const btn = document.getElementById("btn-som-ambiente");
+            const icone = document.getElementById("icone-som");
+            if (btn) btn.style.borderColor = "var(--rosa-neon)";
+            if (icone) icone.innerText = "🔇";
+
+            console.log("🔊 Sirene e Som Neon LIGADOS!");
+        } catch (erro) {
+            console.error("Erro ao tocar áudio:", erro);
+        }
+    } else {
+        desativarSomAmbiente();
     }
+}
+
+function desativarSomAmbiente() {
+    if (oscSiren) { try { oscSiren.stop(); oscSiren.disconnect(); } catch(e){} }
+    if (oscLfo) { try { oscLfo.stop(); oscLfo.disconnect(); } catch(e){} }
+    if (oscAmbient) { try { oscAmbient.stop(); oscAmbient.disconnect(); } catch(e){} }
+
+    somAtivo = false;
+
+    const btn = document.getElementById("btn-som-ambiente");
+    const icone = document.getElementById("icone-som");
+    if (btn) btn.style.borderColor = "var(--azul-neon)";
+    if (icone) icone.innerText = "🔊";
+
+    console.log("🔇 Som DESLIGADO.");
+}
+
+// Vincula ao botão da barra superior
+const btnSom = document.getElementById("btn-som-ambiente");
+if (btnSom) {
+    btnSom.addEventListener("click", alternarSomAmbiente);
+}
+
+// 2. Efeito Sonoro (Beep Futurista) ao passar o mouse nos botões
+function tocarBeepHover() {
+    const ctx = obterAudioContext();
+    if (!ctx) return;
+
+    try {
+        let osc = ctx.createOscillator();
+        let gain = ctx.createGain();
+
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(800, ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(300, ctx.currentTime + 0.08);
+
+        gain.gain.setValueAtTime(0.08, ctx.currentTime); // Volume audível
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.08);
+
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+
+        osc.start();
+        osc.stop(ctx.currentTime + 0.08);
+    } catch (e) {}
+}
+
+document.querySelectorAll('.btn-surreal, .menu-navegacao a, .botao-nav-glow').forEach(elemento => {
+    elemento.addEventListener('mouseenter', tocarBeepHover);
+});
+
+// =========================================================
+// RECURSOS DA PÁGINA (CONTAGEM, MODAL, RÁDIO, VIP)
+// =========================================================
+
+// Contagem Regressiva
+const dataLancamento = new Date("December 31, 2026 00:00:00").getTime();
+setInterval(function() {
+    const elDias = document.getElementById("dias");
+    if (!elDias) return;
+
+    const agora = new Date().getTime();
+    const distancia = dataLancamento - agora;
+    const dias = Math.floor(distancia / (1000 * 60 * 60 * 24));
+    const horas = Math.floor((distancia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutos = Math.floor((distancia % (1000 * 60 * 60)) / (1000 * 60));
+    const segundos = Math.floor((distancia % (1000 * 60)) / 1000);
+
+    document.getElementById("dias").innerText = dias < 10 ? "0" + dias : dias;
+    document.getElementById("horas").innerText = horas < 10 ? "0" + horas : horas;
+    document.getElementById("minutos").innerText = minutos < 10 ? "0" + minutos : minutos;
+    document.getElementById("segundos").innerText = segundos < 10 ? "0" + segundos : segundos;
+}, 1000);
+
+// Barra de Progresso
+window.onscroll = function() {
+    const barra = document.getElementById("barra-progresso");
+    if (!barra) return;
+    const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const scrolled = (winScroll / height) * 100;
+    barra.style.width = scrolled + "%";
+};
+
+// Lightbox Modal
+const modal = document.getElementById("modal-lightbox");
+const imgModal = document.getElementById("img-modal-zoom");
+const btnFechar = document.getElementsByClassName("fechar-modal")[0];
+
+if (modal && imgModal) {
+    document.querySelectorAll('.img-ampliavel').forEach(img => {
+        img.onclick = function() {
+            modal.style.display = "flex";
+            imgModal.src = this.src;
+        }
+    });
+
+    if (btnFechar) btnFechar.onclick = function() { modal.style.display = "none"; }
+    modal.onclick = function(e) { if(e.target === modal) modal.style.display = "none"; }
+}
+
+// Widget de Rádio
+const estacoes = [
+    "Estação: Wave 103 (Synthwave)",
+    "Estação: Flash FM (Hits Pop 80s)",
+    "Estação: V-Rock (Hard Rock)",
+    "Estação: Fever 105 (Funk & Soul)"
+];
+let estacaoAtual = 0;
+let tocando = false;
+
+const elEstacao = document.getElementById("radio-musica");
+const btnPlay = document.getElementById("btn-radio-play");
+const btnNext = document.getElementById("btn-radio-next");
+const btnPrev = document.getElementById("btn-radio-prev");
+
+if (btnNext) {
+    btnNext.onclick = () => {
+        estacaoAtual = (estacaoAtual + 1) % estacoes.length;
+        if (elEstacao) elEstacao.innerText = estacoes[estacaoAtual];
+    };
+}
+
+if (btnPrev) {
+    btnPrev.onclick = () => {
+        estacaoAtual = (estacaoAtual - 1 + estacoes.length) % estacoes.length;
+        if (elEstacao) elEstacao.innerText = estacoes[estacaoAtual];
+    };
+}
+
+if (btnPlay) {
+    btnPlay.onclick = () => {
+        tocando = !tocando;
+        btnPlay.innerText = tocando ? "⏸" : "▶";
+        btnPlay.classList.toggle("ativo", tocando);
+    };
+}
+
+// Formulário VIP
+const formVip = document.getElementById("form-vip");
+if (formVip) {
+    formVip.onsubmit = function(e) {
+        e.preventDefault();
+        const email = document.getElementById("email-vip").value;
+        const msg = document.getElementById("mensagem-vip");
+        if (msg) msg.innerText = "✔ Sucesso! O e-mail " + email + " foi registrado na lista VIP.";
+        document.getElementById("email-vip").value = "";
+    };
 }
