@@ -29,7 +29,12 @@
                 <li><a href="#trailer">Trailer</a></li>
             </ul>
         </nav>
-        <a href="#inscrever" class="botao-nav-glow">VIP Pass</a>
+        <div class="acoes-header">
+            <button id="btn-som-ambiente" class="botao-nav-glow btn-audio-header">
+                <span id="icone-som">🔊</span> Efeitos & Sirene
+            </button>
+            <a href="#inscrever" class="botao-nav-glow">VIP Pass</a>
+        </div>
     </header>
 
     <!-- Banner Hero Neon -->
@@ -354,7 +359,7 @@
         </div>
     </footer>
 
-    <!-- Scripts JavaScript -->
+    <!-- Scripts JavaScript Integrados -->
     <script>
         // 1. Contagem Regressiva
         const dataLancamento = new Date("December 31, 2026 00:00:00").getTime();
@@ -380,7 +385,7 @@
             document.getElementById("barra-progresso").style.width = scrolled + "%";
         };
 
-        // 3. Lightbox (Ampliar Imagens ao Clicar)
+        // 3. Lightbox Modal (Zoom de Imagens)
         const modal = document.getElementById("modal-lightbox");
         const imgModal = document.getElementById("img-modal-zoom");
         const btnFechar = document.getElementsByClassName("fechar-modal")[0];
@@ -424,7 +429,7 @@
             btnPlay.classList.toggle("ativo", tocando);
         };
 
-        // 5. Form VIP
+        // 5. Formulário VIP
         document.getElementById("form-vip").onsubmit = function(e) {
             e.preventDefault();
             const email = document.getElementById("email-vip").value;
@@ -432,10 +437,101 @@
             msg.innerText = "✔ Sucesso! O e-mail " + email + " foi registrado na lista VIP.";
             document.getElementById("email-vip").value = "";
         };
+
+        // 6. Gerador de Áudio Sintetizado (Sirenes & Ambiência Synthwave)
+        let audioCtx = null;
+        let oscSiren = null;
+        let oscLfo = null;
+        let gainSiren = null;
+        let oscAmbient = null;
+        let gainAmbient = null;
+        let somAtivo = false;
+
+        function iniciarAudio() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+
+            if (!somAtivo) {
+                // Sirene Policial Distante
+                oscSiren = audioCtx.createOscillator();
+                oscLfo = audioCtx.createOscillator();
+                gainSiren = audioCtx.createGain();
+                let lfoGain = audioCtx.createGain();
+
+                oscSiren.type = 'sawtooth';
+                oscSiren.frequency.value = 650;
+
+                oscLfo.type = 'sine';
+                oscLfo.frequency.value = 0.3;
+                lfoGain.gain.value = 200;
+
+                oscLfo.connect(lfoGain);
+                lfoGain.connect(oscSiren.frequency);
+
+                gainSiren.gain.value = 0.04;
+
+                oscSiren.connect(gainSiren);
+                gainSiren.connect(audioCtx.destination);
+
+                oscSiren.start();
+                oscLfo.start();
+
+                // Grave Synthwave de Fundo
+                oscAmbient = audioCtx.createOscillator();
+                gainAmbient = audioCtx.createGain();
+
+                oscAmbient.type = 'triangle';
+                oscAmbient.frequency.value = 55;
+                gainAmbient.gain.value = 0.08;
+
+                oscAmbient.connect(gainAmbient);
+                gainAmbient.connect(audioCtx.destination);
+
+                oscAmbient.start();
+
+                somAtivo = true;
+                document.getElementById("icone-som").innerText = "🔇";
+                document.getElementById("btn-som-ambiente").style.borderColor = "var(--rosa-neon)";
+            } else {
+                desativarAudio();
+            }
+        }
+
+        function desativarAudio() {
+            if (oscSiren) { oscSiren.stop(); oscSiren.disconnect(); }
+            if (oscLfo) { oscLfo.stop(); oscLfo.disconnect(); }
+            if (oscAmbient) { oscAmbient.stop(); oscAmbient.disconnect(); }
+            somAtivo = false;
+            document.getElementById("icone-som").innerText = "🔊";
+            document.getElementById("btn-som-ambiente").style.borderColor = "var(--azul-neon)";
+        }
+
+        document.getElementById("btn-som-ambiente").addEventListener("click", iniciarAudio);
+
+        // Som de Hover nos Botões
+        function tocarBeepHover() {
+            if (!audioCtx || audioCtx.state === 'suspended') return;
+            let osc = audioCtx.createOscillator();
+            let gain = audioCtx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(800, audioCtx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(400, audioCtx.currentTime + 0.08);
+            gain.gain.setValueAtTime(0.02, audioCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.08);
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.start();
+            osc.stop(audioCtx.currentTime + 0.08);
+        }
+
+        document.querySelectorAll('.btn-surreal, .menu-navegacao a, .botao-nav-glow').forEach(elemento => {
+            elemento.addEventListener('mouseenter', tocarBeepHover);
+        });
     </script>
 </body>
 </html>
-<!-- Adicione este botão de áudio no seu <header> ou na seção hero -->
-<button id="btn-som-ambiente" class="botao-nav-glow">
-    <span id="icone-som">🔊</span> Áudio de Fundo
-</button>

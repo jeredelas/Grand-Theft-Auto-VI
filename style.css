@@ -16,12 +16,24 @@
 }
 
 /* =========================================================
-   2. RESET & BARRA DE SCROLL SUPREMA
+   2. RESET & EFEITO SCANLINE CRT
    ========================================================= */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+body::before {
+    content: " ";
+    display: block;
+    position: fixed;
+    top: 0; left: 0; bottom: 0; right: 0;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
+                linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+    z-index: 2500;
+    background-size: 100% 3px, 6px 100%;
+    pointer-events: none;
 }
 
 #barra-progresso {
@@ -125,11 +137,17 @@ body {
     text-shadow: 0 0 10px var(--azul-neon);
 }
 
+.acoes-header {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
 .botao-nav-glow {
     background: transparent;
     color: var(--rosa-neon);
     border: 2px solid var(--rosa-neon);
-    padding: 8px 20px;
+    padding: 8px 18px;
     border-radius: 25px;
     font-family: var(--fonte-titulo);
     font-size: 12px;
@@ -138,6 +156,13 @@ body {
     text-transform: uppercase;
     transition: all 0.3s ease;
     box-shadow: 0 0 10px rgba(255, 0, 127, 0.2);
+    cursor: pointer;
+}
+
+.btn-audio-header {
+    color: var(--azul-neon);
+    border-color: var(--azul-neon);
+    box-shadow: 0 0 10px rgba(0, 240, 255, 0.2);
 }
 
 .botao-nav-glow:hover {
@@ -148,7 +173,7 @@ body {
 }
 
 /* =========================================================
-   4. HERO SECAO PARALLAX
+   4. HERO SECAO PARALLAX & EFEITO GLITCH
    ========================================================= */
 .secao-hero {
     position: relative;
@@ -214,7 +239,17 @@ body {
     font-weight: 900;
     line-height: 1.05;
     margin-bottom: 20px;
-    text-shadow: 0 0 30px rgba(0,0,0,0.9);
+    position: relative;
+    animation: glitch 3s infinite;
+}
+
+@keyframes glitch {
+    0% { text-shadow: 2px 0 0 var(--rosa-neon), -2px 0 0 var(--azul-neon); }
+    95% { text-shadow: 2px 0 0 var(--rosa-neon), -2px 0 0 var(--azul-neon); }
+    96% { text-shadow: -4px 0 0 var(--rosa-neon), 4px 0 0 var(--azul-neon); }
+    97% { text-shadow: 4px 0 0 var(--rosa-neon), -4px 0 0 var(--azul-neon); }
+    98% { text-shadow: 0 0 0 transparent; }
+    100% { text-shadow: 2px 0 0 var(--rosa-neon), -2px 0 0 var(--azul-neon); }
 }
 
 .texto-gradiente-neon {
@@ -262,7 +297,8 @@ body {
 
 .btn-rosa:hover {
     transform: translateY(-4px);
-    box-shadow: 0 0 35px var(--rosa-neon);
+    box-shadow: 0 0 35px var(--rosa-neon), 0 0 50px var(--azul-neon);
+    filter: brightness(1.2);
 }
 
 .btn-ciano {
@@ -883,36 +919,4 @@ body {
         right: 10px;
         padding: 8px 12px;
     }
-} /* Efeito de Varredura Scanline (Efeito TV Anos 80/Retro) */
-body::before {
-    content: " ";
-    display: block;
-    position: fixed;
-    top: 0; left: 0; bottom: 0; right: 0;
-    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
-                linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
-    z-index: 2500;
-    background-size: 100% 3px, 6px 100%;
-    pointer-events: none;
-}
-
-/* Efeito Glitch de Neon no Título Principal */
-.titulo-surreal {
-    position: relative;
-    animation: glitch 3s infinite;
-}
-
-@keyframes glitch {
-    0% { text-shadow: 2px 0 0 var(--rosa-neon), -2px 0 0 var(--azul-neon); }
-    95% { text-shadow: 2px 0 0 var(--rosa-neon), -2px 0 0 var(--azul-neon); }
-    96% { text-shadow: -4px 0 0 var(--rosa-neon), 4px 0 0 var(--azul-neon); }
-    97% { text-shadow: 4px 0 0 var(--rosa-neon), -4px 0 0 var(--azul-neon); }
-    98% { text-shadow: 0 0 0 transparent; }
-    100% { text-shadow: 2px 0 0 var(--rosa-neon), -2px 0 0 var(--azul-neon); }
-}
-
-/* Brilho Interativo nos Botes ao Passar o Mouse */
-.btn-surreal:hover {
-    filter: brightness(1.2);
-    box-shadow: 0 0 30px var(--rosa-neon), 0 0 50px var(--azul-neon);
 }
