@@ -1,0 +1,95 @@
+// Gerador de Áudio Sintetizado (Sintetizador Web Audio API para Sirenes e Ambiência Synthwave)
+let audioCtx = null;
+let oscSiren = null;
+let oscLfo = null;
+let gainSiren = null;
+let oscAmbient = null;
+let gainAmbient = null;
+let somAtivo = false;
+
+function iniciarAudio() {
+    if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    }
+
+    if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+    }
+
+    if (!somAtivo) {
+        // 1. Som de Sirene Distante (Modulação Típica de Policial de Vice City)
+        oscSiren = audioCtx.createOscillator();
+        oscLfo = audioCtx.createOscillator();
+        gainSiren = audioCtx.createGain();
+        let lfoGain = audioCtx.createGain();
+
+        oscSiren.type = 'sawtooth';
+        oscSiren.frequency.value = 650; // Frequência base da sirene
+
+        oscLfo.type = 'sine';
+        oscLfo.frequency.value = 0.3; // Velocidade da oscilação da sirene
+        lfoGain.gain.value = 200; // Amplitude da variação de tom
+
+        oscLfo.connect(lfoGain);
+        lfoGain.connect(oscSiren.frequency);
+
+        gainSiren.gain.value = 0.04; // Volume baixo para fundo suave
+
+        oscSiren.connect(gainSiren);
+        gainSiren.connect(audioCtx.destination);
+
+        oscSiren.start();
+        oscLfo.start();
+
+        // 2. Grave de Ambiência Synthwave Neon
+        oscAmbient = audioCtx.createOscillator();
+        gainAmbient = audioCtx.createGain();
+
+        oscAmbient.type = 'triangle';
+        oscAmbient.frequency.value = 55; // Nota A1 grave
+        gainAmbient.gain.value = 0.08;
+
+        oscAmbient.connect(gainAmbient);
+        gainAmbient.connect(audioCtx.destination);
+
+        oscAmbient.start();
+
+        somAtivo = true;
+        document.getElementById("icone-som").innerText = "🔇";
+        document.getElementById("btn-som-ambiente").style.borderColor = "var(--rosa-neon)";
+    } else {
+        desativarAudio();
+    }
+}
+
+function desativarAudio() {
+    if (oscSiren) { oscSiren.stop(); oscSiren.disconnect(); }
+    if (oscLfo) { oscLfo.stop(); oscLfo.disconnect(); }
+    if (oscAmbient) { oscAmbient.stop(); oscAmbient.disconnect(); }
+    somAtivo = false;
+    document.getElementById("icone-som").innerText = "🔊";
+    document.getElementById("btn-som-ambiente").style.borderColor = "var(--azul-neon)";
+}
+
+// Vincula o clique ao botão de áudio
+document.getElementById("btn-som-ambiente").addEventListener("click", iniciarAudio);
+
+// Efeito Sonoro ao Passar o Mouse nos Botões (Beep Neon)
+function tocarBeepHover() {
+    if (!audioCtx || audioCtx.state === 'suspended') return;
+    let osc = audioCtx.createOscillator();
+    let gain = audioCtx.createGain();
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(800, audioCtx.currentTime);
+    osc.frequency.exponentialRampToValueAtTime(400, audioCtx.currentTime + 0.08);
+    gain.gain.setValueAtTime(0.02, audioCtx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.08);
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+    osc.start();
+    osc.stop(audioCtx.currentTime + 0.08);
+}
+
+document.querySelectorAll('.btn-surreal, .menu-navegacao a').forEach(elemento => {
+    elemento.addEventListener('mouseenter', tocarBeepHover);
+});
