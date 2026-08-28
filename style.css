@@ -1,225 +1,99 @@
-/* Resete Básico e Variáveis de Cores */
-:root {
-    --bg-escuro: #0a0512;
-    --bg-card: #160a29;
-    --rosa-neon: #ff007f;
-    --azul-neon: #00f0ff;
-    --texto-claro: #ffffff;
-    --texto-suave: #d1c4e9;
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
+/* Estilo Global e Fundo Neon */
 body {
-    background-color: var(--bg-escuro);
-    color: var(--texto-claro);
-    font-family: 'Poppins', sans-serif;
-    line-height: 1.6;
-}
-
-/* Cabeçalho */
-.cabecalho {
-    background-color: rgba(22, 10, 41, 0.9);
+    background-color: #0b0612; /* Roxo ultra escuro */
+    color: #ffffff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    padding: 20px 40px;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    border-bottom: 2px solid var(--rosa-neon);
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
 }
 
-.logo {
-    font-size: 28px;
-    font-weight: 800;
-    color: var(--texto-claro);
-}
-
-.logo span {
-    color: var(--rosa-neon);
-}
-
-.menu {
-    display: flex;
-    list-style: none;
-    gap: 20px;
-}
-
-.menu a {
-    color: var(--texto-claro);
-    text-decoration: none;
-    font-weight: 600;
-    transition: color 0.3s ease;
-}
-
-.menu a:hover {
-    color: var(--azul-neon);
-}
-
-/* Layout do Container Central */
+/* Container Principal Centralizado */
 .container {
-    max-width: 900px;
-    margin: 30px auto;
-    padding: 0 20px;
+    background-color: #170c27; /* Roxo escuro */
+    border: 2px solid #ff007f; /* Borda magenta Vice City */
+    width: 100%;
+    max-width: 650px;
+    padding: 30px; /* Espaçamento interno */
+    margin: 0 auto; /* Espaçamento externo / Centralização */
+    border-radius: 20px; /* Cantos arredondados */
+    text-align: center; /* Centralização do conteúdo */
+    box-shadow: 0 0 25px rgba(255, 0, 127, 0.3);
 }
 
-/* Estilização Geral das Seções */
-section {
-    background-color: var(--bg-card);
-    border-radius: 16px;
-    padding: 30px;
-    margin-bottom: 30px;
-    text-align: center;
-    border: 1px solid rgba(255, 0, 127, 0.2);
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-}
-
+/* Título com Efeito Neon */
 h1 {
-    font-size: 40px;
-    color: var(--rosa-neon);
-    text-shadow: 0 0 12px var(--rosa-neon);
-    margin-bottom: 5px;
-}
-
-h2 {
-    font-size: 28px;
-    color: var(--azul-neon);
+    color: #ff007f;
+    font-size: 36px;
+    text-align: center;
+    margin-top: 0;
     margin-bottom: 20px;
-    text-shadow: 0 0 8px var(--azul-neon);
+    text-shadow: 0 0 10px #ff007f, 0 0 20px #00f0ff;
 }
 
-.subtitulo {
-    font-size: 18px;
-    color: var(--texto-suave);
-    margin-bottom: 25px;
-}
-
-/* Imagem Destaque */
+/* Imagem Principal */
 .imagem-destaque {
     width: 100%;
     height: auto;
-    border-radius: 12px;
-    border: 2px solid var(--azul-neon);
+    border-radius: 12px; /* Cantos arredondados na imagem */
+    margin-bottom: 20px;
+    border: 1px solid #00f0ff;
+}
+
+/* Texto Informativo */
+.descricao {
+    color: #e0d5f5;
+    font-size: 16px;
+    text-align: justify;
+    padding: 0 10px;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+/* Galeria em Grade para Imagens Secundárias */
+.galeria {
+    display: flex;
+    gap: 15px;
     margin-bottom: 25px;
 }
 
-/* Botões */
-.botoes-acao {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    flex-wrap: wrap;
+.galeria img {
+    width: 50%;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 1px solid #ff007f;
+    transition: transform 0.3s ease, border-color 0.3s ease;
 }
 
+/* Efeito Hover nas Imagens da Galeria */
+.galeria img:hover {
+    transform: scale(1.03);
+    border-color: #00f0ff;
+}
+
+/* Botão Estilizado */
 .botao {
     display: inline-block;
-    padding: 12px 28px;
-    border-radius: 25px;
+    background-color: #ff007f;
+    color: #ffffff;
+    font-size: 18px;
+    padding: 14px 32px;
+    border-radius: 30px;
     text-decoration: none;
-    font-weight: 600;
+    font-weight: bold;
+    text-transform: uppercase;
     transition: all 0.3s ease;
+    box-shadow: 0 0 15px rgba(255, 0, 127, 0.5);
 }
 
-.botao-principal {
-    background-color: var(--rosa-neon);
-    color: var(--texto-claro);
-    box-shadow: 0 0 15px rgba(255, 0, 127, 0.4);
-}
-
-.botao-secundario {
-    background-color: transparent;
-    color: var(--azul-neon);
-    border: 2px solid var(--azul-neon);
-}
-
-/* Efeitos Hover nos Botões */
-.botao-principal:hover {
-    background-color: var(--azul-neon);
-    color: var(--bg-escuro);
-    box-shadow: 0 0 20px var(--azul-neon);
-    transform: translateY(-2px);
-}
-
-.botao-secundario:hover {
-    background-color: var(--azul-neon);
-    color: var(--bg-escuro);
-    box-shadow: 0 0 20px var(--azul-neon);
-    transform: translateY(-2px);
-}
-
-/* Texto Sobre */
-.secao-sobre p {
-    color: var(--texto-suave);
-    font-size: 16px;
-    text-align: justify;
-    line-height: 1.8;
-}
-
-/* Galeria de Imagens */
-.grade-galeria {
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-    flex-wrap: wrap;
-}
-
-.cartao-imagem {
-    flex: 1;
-    min-width: 250px;
-    background-color: rgba(0, 0, 0, 0.3);
-    border-radius: 10px;
-    padding: 10px;
-    border: 1px solid var(--rosa-neon);
-    transition: transform 0.3s ease;
-}
-
-.cartao-imagem:hover {
-    transform: scale(1.03);
-}
-
-.cartao-imagem img {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
-    border-radius: 8px;
-}
-
-.cartao-imagem p {
-    margin-top: 10px;
-    font-size: 14px;
-    color: var(--texto-suave);
-}
-
-/* Vídeo Responsivo */
-.container-video {
-    position: relative;
-    padding-bottom: 56.25%; /* Proporção 16:9 */
-    height: 0;
-    overflow: hidden;
-    border-radius: 12px;
-    border: 1px solid var(--rosa-neon);
-}
-
-.container-video iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border: 0;
-}
-
-/* Rodapé */
-.rodape {
-    text-align: center;
-    padding: 20px;
-    background-color: var(--bg-card);
-    border-top: 1px solid rgba(255, 0, 127, 0.2);
-    color: var(--texto-suave);
-    font-size: 14px;
+/* Efeito :hover no Botão */
+.botao:hover {
+    background-color: #00f0ff; /* Transiciona para Azul Ciano */
+    color: #0b0612;
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.8);
+    transform: translateY(-3px);
 }
