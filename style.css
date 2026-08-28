@@ -16,12 +16,23 @@
 }
 
 /* =========================================================
-   2. RESET & BARRAS DE ROLAGEM
+   2. RESET & BARRA DE SCROLL SUPREMA
    ========================================================= */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+#barra-progresso {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--rosa-neon), var(--azul-neon), var(--laranja-neon));
+    width: 0%;
+    z-index: 3000;
+    box-shadow: 0 0 10px var(--azul-neon);
 }
 
 ::-webkit-scrollbar {
@@ -63,7 +74,7 @@ body {
    ========================================================= */
 .cabecalho {
     position: fixed;
-    top: 3px;
+    top: 4px;
     left: 0;
     width: 100%;
     display: flex;
@@ -240,6 +251,7 @@ body {
     text-transform: uppercase;
     transition: all 0.3s ease;
     cursor: pointer;
+    border: none;
 }
 
 .btn-rosa {
@@ -268,11 +280,67 @@ body {
 }
 
 /* =========================================================
-   5. SEÇÃO CONTAGEM REGRESSIVA
+   5. WIDGET RADIO VICE CITY
+   ========================================================= */
+.widget-radio {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(15, 6, 28, 0.95);
+    border: 1px solid var(--azul-neon);
+    border-radius: 16px;
+    padding: 12px 18px;
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
+    backdrop-filter: blur(10px);
+    z-index: 1500;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.radio-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--fonte-titulo);
+    font-size: 13px;
+    color: var(--rosa-neon);
+}
+
+.radio-controles {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.btn-radio-ctrl {
+    background: transparent;
+    border: 1px solid var(--azul-neon);
+    color: var(--azul-neon);
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-radio-ctrl:hover, .btn-radio-ctrl.ativo {
+    background: var(--azul-neon);
+    color: var(--bg-profundo);
+    box-shadow: 0 0 10px var(--azul-neon);
+}
+
+.radio-status {
+    font-size: 12px;
+    color: var(--texto-suave);
+    text-align: center;
+}
+
+/* =========================================================
+   6. SEÇÃO CONTAGEM REGRESSIVA
    ========================================================= */
 .bg-contagem {
     background: linear-gradient(180deg, var(--bg-profundo) 0%, rgba(15, 6, 28, 0.9) 50%, var(--bg-profundo) 100%);
-    border-y: 1px solid rgba(255, 0, 127, 0.2);
 }
 
 .descricao-subtitulo {
@@ -322,15 +390,8 @@ body {
     letter-spacing: 2px;
 }
 
-.titulo-lancado {
-    font-family: var(--fonte-titulo);
-    font-size: 32px;
-    color: var(--azul-neon);
-    text-shadow: 0 0 20px var(--azul-neon);
-}
-
 /* =========================================================
-   6. FAIXA DE ESTATÍSTICAS
+   7. FAIXA DE ESTATÍSTICAS
    ========================================================= */
 .faixa-estatisticas {
     display: flex;
@@ -364,7 +425,7 @@ body {
 }
 
 /* =========================================================
-   7. SEÇÕES E CARDS
+   8. SEÇÕES E CARDS
    ========================================================= */
 .secao-padrao {
     padding: 90px 20px;
@@ -437,18 +498,22 @@ body {
     box-shadow: 0 0 25px rgba(0, 240, 255, 0.3);
 }
 
+.img-ampliavel {
+    cursor: pointer;
+    transition: transform 0.4s ease;
+}
+
 .img-efeito-zoom {
     width: 100%;
     display: block;
-    transition: transform 0.5s ease;
 }
 
-.img-efeito-zoom:hover {
+.img-ampliavel:hover {
     transform: scale(1.05);
 }
 
 /* =========================================================
-   8. PROTAGONISTAS & CARDS
+   9. PROTAGONISTAS & CARDS
    ========================================================= */
 .grid-cards-duplo {
     display: grid;
@@ -530,7 +595,7 @@ body {
 }
 
 /* =========================================================
-   9. REGIÕES DE LEONIDA
+   10. REGIÕES DE LEONIDA
    ========================================================= */
 .grid-regioes {
     display: grid;
@@ -562,11 +627,6 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.4s ease;
-}
-
-.card-regiao:hover .img-card-regiao img {
-    transform: scale(1.1);
 }
 
 .conteudo-card-regiao {
@@ -586,7 +646,7 @@ body {
 }
 
 /* =========================================================
-   10. RECURSOS TÉCNICOS
+   11. RECURSOS TÉCNICOS & FORM VIP
    ========================================================= */
 .grid-3-colunas {
     display: grid;
@@ -628,8 +688,48 @@ body {
     font-size: 16px;
 }
 
+.caixa-vip {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.caixa-vip h2 {
+    font-family: var(--fonte-titulo);
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.formulario-vip {
+    display: flex;
+    gap: 15px;
+    margin-top: 25px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.formulario-vip input {
+    padding: 15px 25px;
+    border-radius: 30px;
+    border: 1px solid var(--azul-neon);
+    background: rgba(4, 1, 9, 0.8);
+    color: #fff;
+    font-family: var(--fonte-corpo);
+    font-size: 16px;
+    outline: none;
+    flex: 1;
+    min-width: 250px;
+}
+
+.mensagem-sucesso {
+    margin-top: 15px;
+    color: var(--azul-neon);
+    font-family: var(--fonte-titulo);
+    font-size: 14px;
+}
+
 /* =========================================================
-   11. GALERIA EXPANDIDA
+   12. GALERIA & LIGHTBOX MODAL
    ========================================================= */
 .grade-galeria-expandida {
     display: grid;
@@ -653,11 +753,6 @@ body {
     height: 320px;
     object-fit: cover;
     display: block;
-    transition: transform 0.5s ease;
-}
-
-.item-galeria-grande:hover img, .item-galeria-card:hover img {
-    transform: scale(1.08);
 }
 
 .legenda-imagem {
@@ -667,6 +762,7 @@ body {
     width: 100%;
     padding: 20px;
     background: linear-gradient(transparent, rgba(4, 1, 9, 0.95));
+    pointer-events: none;
 }
 
 .legenda-imagem h4 {
@@ -680,8 +776,39 @@ body {
     color: var(--texto-suave);
 }
 
+.modal-lightbox {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(4, 1, 9, 0.95);
+    z-index: 4000;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(10px);
+}
+
+.conteudo-modal {
+    max-width: 85%;
+    max-height: 85%;
+    border-radius: 12px;
+    border: 2px solid var(--rosa-neon);
+    box-shadow: 0 0 35px var(--rosa-neon);
+}
+
+.fechar-modal {
+    position: absolute;
+    top: 25px;
+    right: 35px;
+    color: #fff;
+    font-size: 40px;
+    cursor: pointer;
+}
+
 /* =========================================================
-   12. TRAILER E RODAPÉ
+   13. TRAILER E RODAPÉ
    ========================================================= */
 .moldura-video-surreal {
     background: var(--bg-card);
@@ -735,7 +862,7 @@ body {
 }
 
 /* =========================================================
-   13. RESPONSIVIDADE
+   14. RESPONSIVIDADE
    ========================================================= */
 @media (max-width: 900px) {
     .grid-2-colunas, .item-galeria-grande {
@@ -749,5 +876,11 @@ body {
     
     .menu-navegacao {
         display: none;
+    }
+
+    .widget-radio {
+        bottom: 10px;
+        right: 10px;
+        padding: 8px 12px;
     }
 }

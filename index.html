@@ -9,6 +9,9 @@
 </head>
 <body>
 
+    <!-- Barra de Progresso de Rolagem -->
+    <div id="barra-progresso"></div>
+
     <div class="linha-neon-topo"></div>
 
     <!-- Navegação Futurista -->
@@ -26,7 +29,7 @@
                 <li><a href="#trailer">Trailer</a></li>
             </ul>
         </nav>
-        <a href="#trailer" class="botao-nav-glow">Ver Trailer</a>
+        <a href="#inscrever" class="botao-nav-glow">VIP Pass</a>
     </header>
 
     <!-- Banner Hero Neon -->
@@ -49,6 +52,20 @@
             </div>
         </div>
     </section>
+
+    <!-- Mini Player de Rádio de Vice City -->
+    <div class="widget-radio">
+        <div class="radio-header">
+            <span class="icone-radio">📻</span>
+            <span class="radio-titulo">Vice FM 98.3</span>
+        </div>
+        <div class="radio-controles">
+            <button id="btn-radio-prev" class="btn-radio-ctrl">❮</button>
+            <button id="btn-radio-play" class="btn-radio-ctrl play-btn">▶</button>
+            <button id="btn-radio-next" class="btn-radio-ctrl">❯</button>
+        </div>
+        <div class="radio-status" id="radio-musica">Estação: Wave 103 (Synthwave)</div>
+    </div>
 
     <!-- Seção Contagem Regressiva -->
     <section id="contagem" class="secao-padrao bg-contagem">
@@ -116,7 +133,7 @@
                 </div>
                 <div class="coluna-midia">
                     <div class="moldura-imagem-neon">
-                        <img src="https://www.europanet.com.br/image_gen/resizeimg.php?cod_produto=6001704" alt="GTA VI Posterzine Oficial" class="img-efeito-zoom">
+                        <img src="https://www.europanet.com.br/image_gen/resizeimg.php?cod_produto=6001704" alt="GTA VI Posterzine Oficial" class="img-efeito-zoom img-ampliavel">
                     </div>
                 </div>
             </div>
@@ -134,7 +151,7 @@
             <div class="grid-cards-duplo">
                 <article class="card-personagem-surreal">
                     <div class="card-imagem">
-                        <img src="https://www.europanet.com.br/image_gen/resizeimg.php?cod_produto=6001704" alt="Lucia">
+                        <img src="https://www.europanet.com.br/image_gen/resizeimg.php?cod_produto=6001704" alt="Lucia" class="img-ampliavel">
                         <div class="overlay-gradiente"></div>
                     </div>
                     <div class="card-conteudo">
@@ -146,7 +163,7 @@
 
                 <article class="card-personagem-surreal">
                     <div class="card-imagem">
-                        <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=1200&auto=format&fit=crop" alt="Jason">
+                        <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=1200&auto=format&fit=crop" alt="Jason" class="img-ampliavel">
                         <div class="overlay-gradiente"></div>
                     </div>
                     <div class="card-conteudo">
@@ -170,7 +187,7 @@
             <div class="grid-regioes">
                 <div class="card-regiao">
                     <div class="img-card-regiao">
-                        <img src="https://images.unsplash.com/photo-1506929562872-bb421503ef21?q=80&w=800&auto=format&fit=crop" alt="Vice City">
+                        <img src="https://images.unsplash.com/photo-1506929562872-bb421503ef21?q=80&w=800&auto=format&fit=crop" alt="Vice City" class="img-ampliavel">
                     </div>
                     <div class="conteudo-card-regiao">
                         <h3>Vice City</h3>
@@ -179,7 +196,7 @@
                 </div>
                 <div class="card-regiao">
                     <div class="img-card-regiao">
-                        <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=800&auto=format&fit=crop" alt="Grassrivers">
+                        <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=800&auto=format&fit=crop" alt="Grassrivers" class="img-ampliavel">
                     </div>
                     <div class="conteudo-card-regiao">
                         <h3>Grassrivers</h3>
@@ -188,7 +205,7 @@
                 </div>
                 <div class="card-regiao">
                     <div class="img-card-regiao">
-                        <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?q=80&w=800&auto=format&fit=crop" alt="Gator Keys">
+                        <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?q=80&w=800&auto=format&fit=crop" alt="Gator Keys" class="img-ampliavel">
                     </div>
                     <div class="conteudo-card-regiao">
                         <h3>Gator Keys</h3>
@@ -197,7 +214,7 @@
                 </div>
                 <div class="card-regiao">
                     <div class="img-card-regiao">
-                        <img src="https://images.unsplash.com/photo-1519501025264-65ba15a82390?q=80&w=800&auto=format&fit=crop" alt="Kelly County">
+                        <img src="https://images.unsplash.com/photo-1519501025264-65ba15a82390?q=80&w=800&auto=format&fit=crop" alt="Kelly County" class="img-ampliavel">
                     </div>
                     <div class="conteudo-card-regiao">
                         <h3>Kelly County</h3>
@@ -240,41 +257,41 @@
     <section id="galeria" class="secao-padrao">
         <div class="container">
             <div class="cabecalho-central">
-                <span class="categoria-tag">Alta Definição</span>
+                <span class="categoria-tag">Alta Definição (Clique para ampliar)</span>
                 <h2 class="titulo-secao-centro">Galeria Visual de Leonida</h2>
             </div>
 
             <div class="grade-galeria-expandida">
                 <div class="item-galeria-grande">
-                    <img src="https://www.europanet.com.br/image_gen/resizeimg.php?cod_produto=6001704" alt="GTA VI Cover Art">
+                    <img src="https://www.europanet.com.br/image_gen/resizeimg.php?cod_produto=6001704" alt="GTA VI Cover Art" class="img-ampliavel">
                     <div class="legenda-imagem">
                         <h4>GTA VI - Posterzine Oficial</h4>
                         <p>Capa Comemorativa de Colecionador</p>
                     </div>
                 </div>
                 <div class="item-galeria-card">
-                    <img src="https://images.unsplash.com/photo-1514565131-fce0801e5785?q=80&w=800&auto=format&fit=crop" alt="Vice City Skyline">
+                    <img src="https://images.unsplash.com/photo-1514565131-fce0801e5785?q=80&w=800&auto=format&fit=crop" alt="Vice City Skyline" class="img-ampliavel">
                     <div class="legenda-imagem">
                         <h4>Skyline Noturno</h4>
                         <p>Visão Panorâmica de Vice City</p>
                     </div>
                 </div>
                 <div class="item-galeria-card">
-                    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=800&auto=format&fit=crop" alt="Vice Beach">
+                    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=800&auto=format&fit=crop" alt="Vice Beach" class="img-ampliavel">
                     <div class="legenda-imagem">
                         <h4>Vice Beach</h4>
                         <p>Simulação Avançada de Físicas de Água</p>
                     </div>
                 </div>
                 <div class="item-galeria-card">
-                    <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=800&auto=format&fit=crop" alt="Super Carros">
+                    <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=800&auto=format&fit=crop" alt="Super Carros" class="img-ampliavel">
                     <div class="legenda-imagem">
                         <h4>Personalização de Veículos</h4>
                         <p>Física e Modificação de Motores</p>
                     </div>
                 </div>
                 <div class="item-galeria-card">
-                    <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=800&auto=format&fit=crop" alt="Gaming Setup">
+                    <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=800&auto=format&fit=crop" alt="Gaming Setup" class="img-ampliavel">
                     <div class="legenda-imagem">
                         <h4>Next-Gen Gaming</h4>
                         <p>Otimizado para PS5 Pro e Xbox Series X</p>
@@ -284,8 +301,24 @@
         </div>
     </section>
 
+    <!-- Seção Cadastro VIP -->
+    <section id="inscrever" class="secao-padrao bg-escuro">
+        <div class="container">
+            <div class="cartao-surreal caixa-vip">
+                <span class="categoria-tag">Acesso Antecipado</span>
+                <h2>Receba Notícias Exclusivas</h2>
+                <p>Cadastre seu e-mail para receber alertas de novos trailers, data oficial de pré-venda e atualizações da Rockstar Games.</p>
+                <form id="form-vip" class="formulario-vip">
+                    <input type="email" id="email-vip" placeholder="Digite seu melhor e-mail..." required>
+                    <button type="submit" class="btn-surreal btn-rosa">Inscrever-se</button>
+                </form>
+                <div id="mensagem-vip" class="mensagem-sucesso"></div>
+            </div>
+        </div>
+    </section>
+
     <!-- Seção Trailer Oficial -->
-    <section id="trailer" class="secao-padrao bg-escuro">
+    <section id="trailer" class="secao-padrao">
         <div class="container">
             <div class="cabecalho-central">
                 <span class="categoria-tag">Vídeo Oficial</span>
@@ -305,6 +338,12 @@
         </div>
     </section>
 
+    <!-- Modal Lightbox (Zoom de Imagens) -->
+    <div id="modal-lightbox" class="modal-lightbox">
+        <span class="fechar-modal">&times;</span>
+        <img class="conteudo-modal" id="img-modal-zoom" alt="Zoom da Imagem">
+    </div>
+
     <!-- Rodapé Futurista -->
     <footer class="rodape-futurista">
         <div class="container rodape-conteudo">
@@ -315,14 +354,13 @@
         </div>
     </footer>
 
-    <!-- Script da Contagem Regressiva -->
+    <!-- Scripts JavaScript -->
     <script>
+        // 1. Contagem Regressiva
         const dataLancamento = new Date("December 31, 2026 00:00:00").getTime();
-
-        const contador = setInterval(function() {
+        setInterval(function() {
             const agora = new Date().getTime();
             const distancia = dataLancamento - agora;
-
             const dias = Math.floor(distancia / (1000 * 60 * 60 * 24));
             const horas = Math.floor((distancia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const minutos = Math.floor((distancia % (1000 * 60 * 60)) / (1000 * 60));
@@ -332,12 +370,68 @@
             document.getElementById("horas").innerText = horas < 10 ? "0" + horas : horas;
             document.getElementById("minutos").innerText = minutos < 10 ? "0" + minutos : minutos;
             document.getElementById("segundos").innerText = segundos < 10 ? "0" + segundos : segundos;
-
-            if (distancia < 0) {
-                clearInterval(contador);
-                document.getElementById("contador").innerHTML = "<h3 class='titulo-lancado'>JOGO LANÇADO!</h3>";
-            }
         }, 1000);
+
+        // 2. Barra de Progresso de Rolagem
+        window.onscroll = function() {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById("barra-progresso").style.width = scrolled + "%";
+        };
+
+        // 3. Lightbox (Ampliar Imagens ao Clicar)
+        const modal = document.getElementById("modal-lightbox");
+        const imgModal = document.getElementById("img-modal-zoom");
+        const btnFechar = document.getElementsByClassName("fechar-modal")[0];
+
+        document.querySelectorAll('.img-ampliavel').forEach(img => {
+            img.onclick = function() {
+                modal.style.display = "flex";
+                imgModal.src = this.src;
+            }
+        });
+
+        btnFechar.onclick = function() { modal.style.display = "none"; }
+        modal.onclick = function(e) { if(e.target === modal) modal.style.display = "none"; }
+
+        // 4. Widget de Rádio Interativo
+        const estacoes = [
+            "Estação: Wave 103 (Synthwave)",
+            "Estação: Flash FM (Hits Pop 80s)",
+            "Estação: V-Rock (Hard Rock)",
+            "Estação: Fever 105 (Funk & Soul)"
+        ];
+        let estacaoAtual = 0;
+        let tocando = false;
+
+        const elEstacao = document.getElementById("radio-musica");
+        const btnPlay = document.getElementById("btn-radio-play");
+
+        document.getElementById("btn-radio-next").onclick = () => {
+            estacaoAtual = (estacaoAtual + 1) % estacoes.length;
+            elEstacao.innerText = estacoes[estacaoAtual];
+        };
+
+        document.getElementById("btn-radio-prev").onclick = () => {
+            estacaoAtual = (estacaoAtual - 1 + estacoes.length) % estacoes.length;
+            elEstacao.innerText = estacoes[estacaoAtual];
+        };
+
+        btnPlay.onclick = () => {
+            tocando = !tocando;
+            btnPlay.innerText = tocando ? "⏸" : "▶";
+            btnPlay.classList.toggle("ativo", tocando);
+        };
+
+        // 5. Form VIP
+        document.getElementById("form-vip").onsubmit = function(e) {
+            e.preventDefault();
+            const email = document.getElementById("email-vip").value;
+            const msg = document.getElementById("mensagem-vip");
+            msg.innerText = "✔ Sucesso! O e-mail " + email + " foi registrado na lista VIP.";
+            document.getElementById("email-vip").value = "";
+        };
     </script>
 </body>
 </html>
