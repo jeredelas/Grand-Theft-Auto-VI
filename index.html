@@ -3,27 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Grand Theft Auto VI - Vice City</title>
+    <title>GTA VI - Vice City & Leonida</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <div class="container">
-        <h1>Grand Theft Auto VI</h1>
-        
-        <img class="imagem-destaque" src="https://images.alphacoders.com/134/1343003.jpeg" alt="GTA VI Arte Oficial">
-        
-        <p class="descricao">
-            Explore o estado de Leonida e as ruas iluminadas por neon de Vice City. GTA 6 acompanha a jornada de Lucia e Jason em uma história repleta de ação, crime e sobrevivência no submundo de um mapa gigantesco e hiper-realista.
-        </p>
+    <header class="cabecalho">
+        <div class="logo">GTA <span>VI</span></div>
+        <nav>
+            <ul class="menu">
+                <li><a href="#inicio">Início</a></li>
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#galeria">Galeria</a></li>
+                <li><a href="#trailer">Trailer</a></li>
+            </ul>
+        </nav>
+    </header>
 
-        <div class="galeria">
-            <img src="https://images8.alphacoders.com/134/1343004.jpeg" alt="Vice City Beach">
-            <img src="https://images.alphacoders.com/134/1343005.jpeg" alt="Lucia e Jason">
-        </div>
+    <main class="container">
+        
+        <section id="inicio" class="secao-hero">
+            <h1>Grand Theft Auto VI</h1>
+            <p class="subtitulo">Bem-vindo ao estado de Leonida</p>
+            
+            <img class="imagem-destaque" src="https://images.alphacoders.com/134/1343003.jpeg" alt="GTA VI Banner Principal">
+            
+            <div class="botoes-acao">
+                <a href="#trailer" class="botao botao-principal">Assistir Trailer</a>
+                <a href="#sobre" class="botao botao-secundario">Saiba Mais</a>
+            </div>
+        </section>
 
-        <a href="#" class="botao">Ver Trailer Oficial</a>
-    </div>
+        <section id="sobre" class="secao-sobre">
+            <h2>Sobre o Jogo</h2>
+            <p>
+                Grand Theft Auto VI leva você de volta às ruas iluminadas por neon de Vice City e às vastas paisagens do estado de Leonida. Acompanhe a história da dupla Lucia e Jason em uma trama envolvente sobre crime, confiança e sobrevivência no submundo moderno.
+            </p>
+        </section>
+
+        <section id="galeria" class="secao-galeria">
+            <h2>Galeria</h2>
+            <div class="grade-galeria">
+                <div class="cartao-imagem">
+                    <img src="https://images8.alphacoders.com/134/1343004.jpeg" alt="Vice City Beach">
+                    <p>Praias de Vice City</p>
+                </div>
+                <div class="cartao-imagem">
+                    <img src="https://images.alphacoders.com/134/1343005.jpeg" alt="Lucia e Jason">
+                    <p>Lucia e Jason</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="trailer" class="secao-trailer">
+            <h2>Trailer Oficial</h2>
+            <div class="container-video">
+                <iframe 
+                    src="https://www.youtube-nocookie.com/embed/QdBZY2fkU-0" 
+                    title="GTA VI Trailer 1" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="rodape">
+        <p>&copy; 2026 Projeto Fan Site GTA VI. Todos os direitos das imagens pertencem à Rockstar Games.</p>
+    </footer>
 
 </body>
 </html>
