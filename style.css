@@ -1,359 +1,445 @@
+/* =========================================================
+   1. VARIÁVEIS DE CORES E PALETA VICE CITY
+   ========================================================= */
 :root {
-    --bg-dark: #080311;
-    --bg-card: rgba(23, 11, 41, 0.7);
-    --neon-pink: #ff007f;
-    --neon-cyan: #00f0ff;
-    --neon-purple: #9d00ff;
-    --text-primary: #ffffff;
-    --text-secondary: #cbb8e3;
-    --font-heading: 'Orbitron', sans-serif;
-    --font-body: 'Rajdhani', sans-serif;
+    --fundo-principal: #080313;   /* Roxo/Preto Noturno */
+    --fundo-painel: #130924;      /* Roxo Escuro */
+    --rosa-neon: #ff007f;         /* Magenta Vice City */
+    --azul-neon: #00f0ff;         /* Ciano Eletrizante */
+    --laranja-neon: #ff6b00;      /* Laranja Pôr do Sol */
+    --texto-brancao: #ffffff;
+    --texto-suave: #d5c8e8;
+    --fonte-titulo: 'Orbitron', sans-serif;
+    --fonte-corpo: 'Poppins', sans-serif;
 }
 
+/* =========================================================
+   2. RESET E ESTILOS GERAIS
+   ========================================================= */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
-    background-color: var(--bg-dark);
-    color: var(--text-primary);
-    font-family: var(--font-body);
-    font-size: 18px;
+    background-color: var(--fundo-principal);
+    color: var(--texto-brancao);
+    font-family: var(--fonte-corpo);
     line-height: 1.6;
     overflow-x: hidden;
 }
 
-/* Navbar Glassmorphism */
-.navbar {
+/* =========================================================
+   3. CABEÇALHO E NAVEGAÇÃO
+   ========================================================= */
+.cabecalho {
     position: fixed;
     top: 0;
+    left: 0;
     width: 100%;
-    padding: 20px 50px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: rgba(8, 3, 17, 0.85);
+    padding: 18px 50px;
+    background: rgba(8, 3, 19, 0.85);
     backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(255, 0, 127, 0.3);
+    border-bottom: 2px solid rgba(255, 0, 127, 0.4);
     z-index: 1000;
 }
 
 .logo {
-    font-family: var(--font-heading);
-    font-size: 26px;
+    font-family: var(--fonte-titulo);
+    font-size: 28px;
     font-weight: 900;
+    color: var(--texto-brancao);
     letter-spacing: 2px;
-    color: var(--text-primary);
 }
 
 .logo span {
-    color: var(--neon-pink);
-    text-shadow: 0 0 10px var(--neon-pink);
+    color: var(--rosa-neon);
+    text-shadow: 0 0 10px var(--rosa-neon);
 }
 
-.nav-menu {
+.menu-navegacao {
     display: flex;
     list-style: none;
-    gap: 30px;
+    gap: 25px;
 }
 
-.nav-menu a {
-    color: var(--text-secondary);
+.menu-navegacao a {
+    color: var(--texto-suave);
     text-decoration: none;
     font-weight: 600;
+    font-size: 15px;
     text-transform: uppercase;
     transition: color 0.3s ease;
 }
 
-.nav-menu a:hover {
-    color: var(--neon-cyan);
-    text-shadow: 0 0 8px var(--neon-cyan);
+/* Efeito Hover nos links do menu */
+.menu-navegacao a:hover {
+    color: var(--azul-neon);
+    text-shadow: 0 0 8px var(--azul-neon);
 }
 
-.btn-nav {
-    background: transparent;
-    border: 2px solid var(--neon-pink);
-    color: var(--text-primary);
-    padding: 8px 20px;
+.botao-nav {
+    background-color: transparent;
+    color: var(--rosa-neon);
+    border: 2px solid var(--rosa-neon);
+    padding: 8px 22px;
     border-radius: 20px;
     text-decoration: none;
     font-weight: 700;
     text-transform: uppercase;
+    font-size: 14px;
     transition: all 0.3s ease;
 }
 
-.btn-nav:hover {
-    background: var(--neon-pink);
-    box-shadow: 0 0 15px var(--neon-pink);
+/* Efeito Hover no botão da Nav */
+.botao-nav:hover {
+    background-color: var(--rosa-neon);
+    color: var(--texto-brancao);
+    box-shadow: 0 0 15px var(--rosa-neon);
 }
 
-/* Hero Section */
-.hero {
+/* =========================================================
+   4. SEÇÃO HERO (BANER PRINCIPAL)
+   ========================================================= */
+.secao-hero {
     position: relative;
     min-height: 100vh;
     display: flex;
-    align-items: center;
     justify-content: center;
-    padding: 120px 20px 60px;
-    background: linear-gradient(180deg, rgba(8,3,17,0.5) 0%, var(--bg-dark) 100%), 
-                url('https://images.alphacoders.com/134/1343003.jpeg') center/cover no-repeat;
+    align-items: center;
     text-align: center;
+    padding: 120px 20px 60px;
+    background: url('https://images.alphacoders.com/134/1343003.jpeg') center/cover no-repeat;
 }
 
-.hero-content {
-    max-width: 850px;
+.mascara-fundo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, rgba(8, 3, 19, 0.6) 0%, var(--fundo-principal) 100%);
+    z-index: 1;
+}
+
+.conteudo-hero {
+    position: relative;
     z-index: 2;
+    max-width: 800px;
+    margin: 0 auto; /* Centralizado */
 }
 
-.badge {
+.tag-destaque {
     display: inline-block;
-    padding: 6px 16px;
     background: rgba(0, 240, 255, 0.15);
-    border: 1px solid var(--neon-cyan);
-    color: var(--neon-cyan);
+    border: 1px solid var(--azul-neon);
+    color: var(--azul-neon);
+    padding: 6px 18px;
     border-radius: 50px;
-    font-family: var(--font-heading);
-    font-size: 14px;
+    font-size: 13px;
+    font-weight: 700;
     margin-bottom: 20px;
+    text-transform: uppercase;
     letter-spacing: 1px;
 }
 
-.hero h1 {
-    font-family: var(--font-heading);
+.titulo-principal {
+    font-family: var(--fonte-titulo);
     font-size: 52px;
     font-weight: 900;
+    margin-bottom: 15px;
     line-height: 1.1;
-    margin-bottom: 20px;
-    text-shadow: 0 0 20px rgba(0,0,0,0.8);
+    text-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
 }
 
-.highlight {
-    color: var(--neon-pink);
-    text-shadow: 0 0 20px var(--neon-pink);
+.neon-texto {
+    color: var(--rosa-neon);
+    text-shadow: 0 0 18px var(--rosa-neon);
 }
 
-.hero p {
-    font-size: 20px;
-    color: var(--text-secondary);
-    margin-bottom: 35px;
+.descricao-hero {
+    font-size: 18px;
+    color: var(--texto-suave);
+    margin-bottom: 30px;
+    padding: 0 15px;
 }
 
-.hero-actions {
+/* Botões da Hero */
+.container-botoes {
     display: flex;
+    justify-content: center; /* Centralizado */
     gap: 20px;
-    justify-content: center;
+    flex-wrap: wrap;
 }
 
-/* Botões com Efeitos :hover */
-.btn {
+.botao {
+    display: inline-block;
     padding: 14px 32px;
-    border-radius: 30px;
-    font-family: var(--font-heading);
-    font-size: 16px;
+    border-radius: 30px; /* Cantos Arredondados */
+    font-family: var(--fonte-titulo);
+    font-size: 15px;
     font-weight: 700;
     text-decoration: none;
     text-transform: uppercase;
     transition: all 0.3s ease;
-    cursor: pointer;
 }
 
-.btn-primary {
-    background: linear-gradient(45deg, var(--neon-pink), var(--neon-purple));
-    color: var(--text-primary);
+.botao-primario {
+    background: linear-gradient(45deg, var(--rosa-neon), var(--laranja-neon));
+    color: var(--texto-brancao);
     box-shadow: 0 0 20px rgba(255, 0, 127, 0.4);
 }
 
-.btn-primary:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 0 30px var(--neon-pink);
-}
-
-.btn-secondary {
+.botao-secundario {
     background: transparent;
-    color: var(--neon-cyan);
-    border: 2px solid var(--neon-cyan);
+    color: var(--azul-neon);
+    border: 2px solid var(--azul-neon);
 }
 
-.btn-secondary:hover {
-    background: var(--neon-cyan);
-    color: var(--bg-dark);
-    box-shadow: 0 0 25px var(--neon-cyan);
-    transform: translateY(-3px);
+/* Efeitos Hover nos Botões */
+.botao-primario:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 0 30px var(--rosa-neon);
 }
 
-/* Layout de Seções */
-.section {
-    padding: 80px 20px;
+.botao-secundario:hover {
+    background: var(--azul-neon);
+    color: var(--fundo-principal);
+    box-shadow: 0 0 25px var(--azul-neon);
+    transform: translateY(-4px);
 }
 
-.bg-alt {
-    background-color: rgba(23, 11, 41, 0.3);
-}
-
-.container {
+/* =========================================================
+   5. CONTAINER DE SEÇÕES E CARTÕES (GLASSMORPHISM)
+   ========================================================= */
+.secao-container {
     max-width: 1100px;
-    margin: 0 auto;
+    margin: 60px auto; /* Espaçamento externo e centralização */
+    padding: 0 20px;
 }
 
-.grid-2 {
+.titulo-secao {
+    font-family: var(--fonte-titulo);
+    font-size: 34px;
+    text-align: center; /* Centralizado */
+    color: var(--azul-neon);
+    margin-bottom: 40px;
+    text-shadow: 0 0 12px var(--azul-neon);
+}
+
+.cartao-glass {
+    background: rgba(19, 9, 36, 0.75);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 0, 127, 0.3);
+    border-radius: 20px; /* Cantos arredondados */
+    padding: 35px; /* Espaçamento interno */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.grid-2-colunas {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 40px;
+    gap: 35px;
     align-items: center;
 }
 
-.section-title {
-    font-family: var(--font-heading);
-    font-size: 36px;
-    text-align: center;
-    color: var(--neon-cyan);
-    margin-bottom: 50px;
-    text-shadow: 0 0 10px var(--neon-cyan);
+.texto-secao h2 {
+    font-family: var(--fonte-titulo);
+    font-size: 26px;
+    color: var(--rosa-neon);
+    margin-bottom: 15px;
 }
 
-/* Cartões com Efeito de Vidro */
-.glass-card {
-    background: var(--bg-card);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 0, 127, 0.25);
-    border-radius: 20px;
-    padding: 35px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+.texto-secao p {
+    color: var(--texto-suave);
+    font-size: 16px;
+    margin-bottom: 25px;
+    text-align: justify;
 }
 
-.text-block h2 {
-    font-family: var(--font-heading);
-    font-size: 30px;
-    color: var(--neon-pink);
-    margin-bottom: 20px;
-}
-
-.stats {
+.estatisticas {
     display: flex;
     justify-content: space-between;
-    margin-top: 30px;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     padding-top: 20px;
 }
 
-.stat-item {
+.item-estatistica {
     text-align: center;
 }
 
-.stat-item .number {
+.numero-estatistica {
     display: block;
-    font-family: var(--font-heading);
-    font-size: 28px;
-    color: var(--neon-cyan);
+    font-family: var(--fonte-titulo);
+    font-size: 26px;
+    color: var(--azul-neon);
 }
 
-.stat-item .label {
-    font-size: 14px;
-    color: var(--text-secondary);
+.legenda-estatistica {
+    font-size: 13px;
+    color: var(--texto-suave);
 }
 
-.featured-img {
+.imagem-destaque {
     width: 100%;
-    border-radius: 20px;
-    border: 2px solid var(--neon-pink);
-    box-shadow: 0 0 25px rgba(255, 0, 127, 0.3);
+    height: auto;
+    border-radius: 15px; /* Cantos arredondados */
+    border: 2px solid var(--rosa-neon);
+    box-shadow: 0 0 20px rgba(255, 0, 127, 0.2);
 }
 
-/* Grid de Recursos */
-.cards-grid {
+/* =========================================================
+   6. GRADE DE PERSONAGENS
+   ========================================================= */
+.grade-personagens {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 30px;
 }
 
-.feature-card {
-    text-align: center;
+.cartao-personagem {
+    background: var(--fundo-painel);
+    border-radius: 18px; /* Cantos arredondados */
+    overflow: hidden;
+    border: 1px solid rgba(0, 240, 255, 0.2);
     transition: transform 0.3s ease, border-color 0.3s ease;
 }
 
-.feature-card:hover {
+/* Efeito Hover no Cartão de Personagem */
+.cartao-personagem:hover {
     transform: translateY(-8px);
-    border-color: var(--neon-cyan);
-    box-shadow: 0 10px 30px rgba(0, 240, 255, 0.2);
+    border-color: var(--rosa-neon);
+    box-shadow: 0 10px 25px rgba(255, 0, 127, 0.3);
 }
 
-.feature-card .icon {
-    font-size: 40px;
-    margin-bottom: 15px;
-}
-
-.feature-card h3 {
-    font-family: var(--font-heading);
-    font-size: 22px;
-    color: var(--text-primary);
-    margin-bottom: 15px;
-}
-
-.feature-card p {
-    color: var(--text-secondary);
-}
-
-/* Galeria com Efeito Hover nas Imagens */
-.gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 25px;
-}
-
-.gallery-item {
-    position: relative;
-    border-radius: 16px;
-    overflow: hidden;
-    border: 1px solid var(--neon-pink);
-}
-
-.gallery-item img {
+.moldura-imagem img {
     width: 100%;
-    height: 250px;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+}
+
+.info-personagem {
+    padding: 22px; /* Espaçamento interno */
+}
+
+.info-personagem h3 {
+    font-family: var(--fonte-titulo);
+    font-size: 20px;
+    color: var(--rosa-neon);
+    margin-bottom: 10px;
+}
+
+.info-personagem p {
+    font-size: 14px;
+    color: var(--texto-suave);
+}
+
+/* =========================================================
+   7. GALERIA DE IMAGENS
+   ========================================================= */
+.grade-galeria {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.item-galeria {
+    position: relative;
+    border-radius: 15px; /* Cantos arredondados */
+    overflow: hidden;
+    border: 1px solid var(--rosa-neon);
+}
+
+.item-galeria img {
+    width: 100%;
+    height: 220px;
     object-fit: cover;
     display: block;
     transition: transform 0.4s ease;
 }
 
-.gallery-item:hover img {
+/* Efeito Hover nas Imagens da Galeria */
+.item-galeria:hover img {
     transform: scale(1.08);
 }
 
-.overlay-text {
+.legenda-hover {
     position: absolute;
     bottom: 0;
+    left: 0;
     width: 100%;
-    padding: 15px;
-    background: linear-gradient(transparent, rgba(8, 3, 17, 0.9));
-    font-family: var(--font-heading);
-    color: var(--text-primary);
+    padding: 12px;
+    background: linear-gradient(transparent, rgba(8, 3, 19, 0.9));
+    font-family: var(--fonte-titulo);
+    font-size: 14px;
     text-align: center;
+    color: var(--texto-brancao);
 }
 
-/* Rodapé */
-.footer {
-    text-align: center;
-    padding: 30px;
+/* =========================================================
+   8. CONTAINER DE VÍDEO RESPONSIVO
+   ========================================================= */
+.container-video {
+    position: relative;
+    padding-bottom: 56.25%; /* Proporção 16:9 */
+    height: 0;
+    overflow: hidden;
+    border-radius: 18px;
+    padding-top: 0;
+}
+
+.container-video iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+/* =========================================================
+   9. RODAPÉ
+   ========================================================= */
+.rodape {
+    text-align: center; /* Centralizado */
+    padding: 30px 20px;
     background: #040108;
     border-top: 1px solid rgba(255, 0, 127, 0.2);
-    color: var(--text-secondary);
+    color: var(--texto-suave);
     font-size: 14px;
+    margin-top: 60px;
 }
 
-/* Responsividade para Telas Menores */
+/* =========================================================
+   10. RESPONSIVIDADE (CELULARES E TABLETS)
+   ========================================================= */
 @media (max-width: 768px) {
-    .navbar {
+    .cabecalho {
         padding: 15px 20px;
     }
-    .nav-menu {
-        display: none;
+    
+    .menu-navegacao {
+        display: none; /* Esconde menu em telas pequenas para simplicidade */
     }
-    .grid-2 {
+
+    .grid-2-colunas {
         grid-template-columns: 1fr;
     }
-    .hero h1 {
+
+    .titulo-principal {
         font-size: 36px;
+    }
+
+    .descricao-hero {
+        font-size: 15px;
     }
 }
