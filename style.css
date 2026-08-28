@@ -1,445 +1,273 @@
-/* =========================================================
-   1. VARIÁVEIS DE CORES E PALETA VICE CITY
-   ========================================================= */
-:root {
-    --fundo-principal: #080313;   /* Roxo/Preto Noturno */
-    --fundo-painel: #130924;      /* Roxo Escuro */
-    --rosa-neon: #ff007f;         /* Magenta Vice City */
-    --azul-neon: #00f0ff;         /* Ciano Eletrizante */
-    --laranja-neon: #ff6b00;      /* Laranja Pôr do Sol */
-    --texto-brancao: #ffffff;
-    --texto-suave: #d5c8e8;
-    --fonte-titulo: 'Orbitron', sans-serif;
-    --fonte-corpo: 'Poppins', sans-serif;
-}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GTA VI | Experience Leonida & Vice City</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
 
-/* =========================================================
-   2. RESET E ESTILOS GERAIS
-   ========================================================= */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+    <!-- Linha de Brilho Superior -->
+    <div class="linha-neon-topo"></div>
 
-html {
-    scroll-behavior: smooth;
-}
+    <!-- Navegação Estilo HUD -->
+    <header class="cabecalho">
+        <div class="logo">VICE<span>CITY</span> <small>VI</small></div>
+        <nav>
+            <ul class="menu-navegacao">
+                <li><a href="#inicio">Início</a></li>
+                <li><a href="#historia">História</a></li>
+                <li><a href="#personagens">Protagonistas</a></li>
+                <li><a href="#mundo">Leonida</a></li>
+                <li><a href="#tecnologia">Recursos</a></li>
+                <li><a href="#galeria">Galeria</a></li>
+                <li><a href="#trailer">Trailer</a></li>
+            </ul>
+        </nav>
+        <a href="#trailer" class="botao-nav-glow">Assistir Trailer</a>
+    </header>
 
-body {
-    background-color: var(--fundo-principal);
-    color: var(--texto-brancao);
-    font-family: var(--fonte-corpo);
-    line-height: 1.6;
-    overflow-x: hidden;
-}
+    <!-- Banner Hero Neon -->
+    <section id="inicio" class="secao-hero">
+        <div class="particulas-fundo"></div>
+        <div class="conteudo-hero">
+            <div class="badge-status">
+                <span class="ponto-vivo"></span> Lançamento Previsto para 2026
+            </div>
+            <h1 class="titulo-surreal">
+                GRAND THEFT AUTO
+                <span class="texto-gradiente-neon">VI</span>
+            </h1>
+            <p class="subtitulo-hero">
+                Entre no estado de Leonida. Uma experiência em mundo aberto sem precedentes, combinando a loucura tropical de Vice City, redes sociais em tempo real e gráficos de nova geração.
+            </p>
+            <div class="botoes-hero">
+                <a href="#historia" class="btn-surreal btn-rosa">Explorar O Mundo</a>
+                <a href="#galeria" class="btn-surreal btn-ciano">Ver Galeria Expandida</a>
+            </div>
+        </div>
+    </section>
 
-/* =========================================================
-   3. CABEÇALHO E NAVEGAÇÃO
-   ========================================================= */
-.cabecalho {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 18px 50px;
-    background: rgba(8, 3, 19, 0.85);
-    backdrop-filter: blur(12px);
-    border-bottom: 2px solid rgba(255, 0, 127, 0.4);
-    z-index: 1000;
-}
+    <!-- Faixa de Dados do Jogo -->
+    <div class="faixa-estatisticas">
+        <div class="item-faixa">
+            <span class="valor-faixa">4K HDR</span>
+            <span class="rotulo-faixa">Motor RAGE 9</span>
+        </div>
+        <div class="item-faixa">
+            <span class="valor-faixa">Leonida</span>
+            <span class="rotulo-faixa">Estado Completo</span>
+        </div>
+        <div class="item-faixa">
+            <span class="valor-faixa">2</span>
+            <span class="rotulo-faixa">Protagonistas</span>
+        </div>
+        <div class="item-faixa">
+            <span class="valor-faixa">PS5 / XSX</span>
+            <span class="rotulo-faixa">Nova Geração</span>
+        </div>
+    </div>
 
-.logo {
-    font-family: var(--fonte-titulo);
-    font-size: 28px;
-    font-weight: 900;
-    color: var(--texto-brancao);
-    letter-spacing: 2px;
-}
+    <!-- Seção História e Narrativa -->
+    <section id="historia" class="secao-padrao">
+        <div class="container">
+            <div class="cartao-surreal grid-2-colunas">
+                <div class="coluna-texto">
+                    <span class="categoria-tag">Sintonia e Sobrevivência</span>
+                    <h2 class="titulo-secao-esquerda">Amor, Crime e Caos em Leonida</h2>
+                    <p class="texto-descricao">
+                        Em <strong>Grand Theft Auto VI</strong>, a narrativa gira em torno da complexa relação entre <strong>Lucia</strong> e <strong>Jason</strong>. Ambientado no fictício estado de Leonida — inspirado na Flórida moderna —, o jogo explora o contraste entre o glamour das praias banhadas pelo sol e a decadência do crime organizado.
+                    </p>
+                    <p class="texto-descricao">
+                        Inspirados no estilo clássico de Bonnie e Clyde, os dois precisam planejar assaltos ousados, escapar de perseguições policiais de alta intensidade e lidar com a influência das redes sociais que moldam a cultura contemporânea do estado.
+                    </p>
+                </div>
+                <div class="coluna-midia">
+                    <div class="moldura-imagem-neon">
+                        <img src="https://www.europanet.com.br/image_gen/resizeimg.php?cod_produto=6001704" alt="GTA VI Posterzine" class="img-efeito-zoom">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-.logo span {
-    color: var(--rosa-neon);
-    text-shadow: 0 0 10px var(--rosa-neon);
-}
+    <!-- Seção de Protagonistas -->
+    <section id="personagens" class="secao-padrao bg-escuro">
+        <div class="container">
+            <div class="cabecalho-central">
+                <span class="categoria-tag">Dupla Dinâmica</span>
+                <h2 class="titulo-secao-centro">Os Protagonistas</h2>
+            </div>
 
-.menu-navegacao {
-    display: flex;
-    list-style: none;
-    gap: 25px;
-}
+            <div class="grid-cards-duplo">
+                <article class="card-personagem-surreal">
+                    <div class="card-imagem">
+                        <img src="https://www.europanet.com.br/image_gen/resizeimg.php?cod_produto=6001704" alt="Lucia">
+                        <div class="overlay-gradiente"></div>
+                    </div>
+                    <div class="card-conteudo">
+                        <span class="tag-personagem rosa">Protagonista</span>
+                        <h3>Lucia</h3>
+                        <p>A primeira protagonista feminina jogável da franquia na era moderna. Recém-saída da prisão de Penitenciária de Leonida, Lucia é estrategista, calculista e determinada a tomar o controle da cidade.</p>
+                    </div>
+                </article>
 
-.menu-navegacao a {
-    color: var(--texto-suave);
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 15px;
-    text-transform: uppercase;
-    transition: color 0.3s ease;
-}
+                <article class="card-personagem-surreal">
+                    <div class="card-imagem">
+                        <img src="https://www.europanet.com.br/image_gen/resizeimg.php?cod_produto=6001704" alt="Jason">
+                        <div class="overlay-gradiente"></div>
+                    </div>
+                    <div class="card-conteudo">
+                        <span class="tag-personagem ciano">Protagonista</span>
+                        <h3>Jason</h3>
+                        <p>Especialista em pilotagem, armas pesadas e táticas de fuga. Junto com Lucia, Jason forma a espinha dorsal de operações criminosas em Vice City e região.</p>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
 
-/* Efeito Hover nos links do menu */
-.menu-navegacao a:hover {
-    color: var(--azul-neon);
-    text-shadow: 0 0 8px var(--azul-neon);
-}
+    <!-- Seção O Mundo de Leonida -->
+    <section id="mundo" class="secao-padrao">
+        <div class="container">
+            <div class="cabecalho-central">
+                <span class="categoria-tag">Regiões Mapeadas</span>
+                <h2 class="titulo-secao-centro">O Estado de Leonida</h2>
+            </div>
 
-.botao-nav {
-    background-color: transparent;
-    color: var(--rosa-neon);
-    border: 2px solid var(--rosa-neon);
-    padding: 8px 22px;
-    border-radius: 20px;
-    text-decoration: none;
-    font-weight: 700;
-    text-transform: uppercase;
-    font-size: 14px;
-    transition: all 0.3s ease;
-}
+            <div class="grid-regioes">
+                <div class="card-regiao">
+                    <div class="icone-regiao">🏙️</div>
+                    <h3>Vice City</h3>
+                    <p>O coração metropolitano iluminado por neon, arranha-céus, praias lotadas, boates de luxo e Ocean Drive.</p>
+                </div>
+                <div class="card-regiao">
+                    <div class="icone-regiao">🐊</div>
+                    <h3>Grassrivers</h3>
+                    <p>Pântanos tropicais densos baseados no Everglades, habitados por crocodilos, vida selvagem e gangues rurais.</p>
+                </div>
+                <div class="card-regiao">
+                    <div class="icone-regiao">🏝️</div>
+                    <h3>Gator Keys</h3>
+                    <p>Um arquipélago de ilhas tropicais conectadas por pontes gigantescas, perfeito para corridas aquáticas e contrabando.</p>
+                </div>
+                <div class="card-regiao">
+                    <div class="icone-regiao">🏭</div>
+                    <h3>Kelly County</h3>
+                    <p>Zonas industriais, pistas de arrancada e suburbs interioranos com forte presença policial e subcultura automobilística.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-/* Efeito Hover no botão da Nav */
-.botao-nav:hover {
-    background-color: var(--rosa-neon);
-    color: var(--texto-brancao);
-    box-shadow: 0 0 15px var(--rosa-neon);
-}
+    <!-- Seção Recursos Técnicos -->
+    <section id="tecnologia" class="secao-padrao bg-escuro">
+        <div class="container">
+            <div class="cabecalho-central">
+                <span class="categoria-tag">Inovação Tecnológica</span>
+                <h2 class="titulo-secao-centro">Próximo Nível de Imersão</h2>
+            </div>
 
-/* =========================================================
-   4. SEÇÃO HERO (BANER PRINCIPAL)
-   ========================================================= */
-.secao-hero {
-    position: relative;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 120px 20px 60px;
-    background: url('https://images.alphacoders.com/134/1343003.jpeg') center/cover no-repeat;
-}
+            <div class="grid-3-colunas">
+                <div class="card-tecnologia">
+                    <div class="badge-numero">01</div>
+                    <h3>Física de Água e Veículos</h3>
+                    <p>Simulação hidrográfica realista com ondas de praia dinâmicas, física de deformação de pneus na areia e física de colisão totalmente remodelada.</p>
+                </div>
+                <div class="card-tecnologia">
+                    <div class="badge-numero">02</div>
+                    <h3>Inteligência de NPCs</h3>
+                    <p>Pedestres com comportamentos imprevisíveis, rotinas diárias completas, reações orgânicas a crimes e interação constante com telefones celulares.</p>
+                </div>
+                <div class="card-tecnologia">
+                    <div class="badge-numero">03</div>
+                    <h3>Redes Sociais em Tempo Real</h3>
+                    <p>Interface de vídeos curtos dentro do jogo onde ações do jogador e eventos bizarros de Leonida viralizam instantaneamente.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-.mascara-fundo {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(180deg, rgba(8, 3, 19, 0.6) 0%, var(--fundo-principal) 100%);
-    z-index: 1;
-}
+    <!-- Galeria de Imagens Expandida -->
+    <section id="galeria" class="secao-padrao">
+        <div class="container">
+            <div class="cabecalho-central">
+                <span class="categoria-tag">Visual Surreal</span>
+                <h2 class="titulo-secao-centro">Galeria do Jogo</h2>
+            </div>
 
-.conteudo-hero {
-    position: relative;
-    z-index: 2;
-    max-width: 800px;
-    margin: 0 auto; /* Centralizado */
-}
+            <div class="grade-galeria-expandida">
+                <div class="item-galeria-grande">
+                    <img src="https://www.europanet.com.br/image_gen/resizeimg.php?cod_produto=6001704" alt="GTA VI Posterzine Oficial">
+                    <div class="legenda-imagem">
+                        <h4>Posterzine Oficial GTA VI</h4>
+                        <p>Edição de Colecionador</p>
+                    </div>
+                </div>
+                <div class="item-galeria-card">
+                    <img src="https://www.europanet.com.br/image_gen/resizeimg.php?cod_produto=6001704" alt="Vice City Skyline">
+                    <div class="legenda-imagem">
+                        <h4>Vice City Skyline</h4>
+                        <p>Iluminação Global e Ray Tracing</p>
+                    </div>
+                </div>
+                <div class="item-galeria-card">
+                    <img src="https://www.europanet.com.br/image_gen/resizeimg.php?cod_produto=6001704" alt="Lucia e Jason">
+                    <div class="legenda-imagem">
+                        <h4>Lucia & Jason</h4>
+                        <p>Arte Promocional Principal</p>
+                    </div>
+                </div>
+                <div class="item-galeria-card">
+                    <img src="https://www.europanet.com.br/image_gen/resizeimg.php?cod_produto=6001704" alt="Grassrivers">
+                    <div class="legenda-imagem">
+                        <h4>Grassrivers Wetlands</h4>
+                        <p>Ecossistema e Vida Selvagem</p>
+                    </div>
+                </div>
+                <div class="item-galeria-card">
+                    <img src="https://www.europanet.com.br/image_gen/resizeimg.php?cod_produto=6001704" alt="Ocean Drive Night">
+                    <div class="legenda-imagem">
+                        <h4>Ocean Drive à Noite</h4>
+                        <p>Luzes Neon e Vida Noturna</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-.tag-destaque {
-    display: inline-block;
-    background: rgba(0, 240, 255, 0.15);
-    border: 1px solid var(--azul-neon);
-    color: var(--azul-neon);
-    padding: 6px 18px;
-    border-radius: 50px;
-    font-size: 13px;
-    font-weight: 700;
-    margin-bottom: 20px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
+    <!-- Seção Trailer com Moldura Neon -->
+    <section id="trailer" class="secao-padrao bg-escuro">
+        <div class="container">
+            <div class="cabecalho-central">
+                <span class="categoria-tag">Assista Agora</span>
+                <h2 class="titulo-secao-centro">Trailer Oficial #1</h2>
+            </div>
 
-.titulo-principal {
-    font-family: var(--fonte-titulo);
-    font-size: 52px;
-    font-weight: 900;
-    margin-bottom: 15px;
-    line-height: 1.1;
-    text-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
-}
+            <div class="moldura-video-surreal">
+                <div class="container-video">
+                    <iframe 
+                        src="https://www.youtube-nocookie.com/embed/QdBZY2fkU-0" 
+                        title="GTA VI Trailer 1" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
 
-.neon-texto {
-    color: var(--rosa-neon);
-    text-shadow: 0 0 18px var(--rosa-neon);
-}
+    <!-- Rodapé Futuro Neon -->
+    <footer class="rodape-futurista">
+        <div class="container rodape-conteudo">
+            <div class="rodape-logo">
+                VICE<span>CITY</span> <strong>GTA VI</strong>
+            </div>
+            <p>&copy; 2026 Fan Site Oficial de Grand Theft Auto VI. Todas as imagens e marcas registradas pertencem à Rockstar Games.</p>
+        </div>
+    </footer>
 
-.descricao-hero {
-    font-size: 18px;
-    color: var(--texto-suave);
-    margin-bottom: 30px;
-    padding: 0 15px;
-}
-
-/* Botões da Hero */
-.container-botoes {
-    display: flex;
-    justify-content: center; /* Centralizado */
-    gap: 20px;
-    flex-wrap: wrap;
-}
-
-.botao {
-    display: inline-block;
-    padding: 14px 32px;
-    border-radius: 30px; /* Cantos Arredondados */
-    font-family: var(--fonte-titulo);
-    font-size: 15px;
-    font-weight: 700;
-    text-decoration: none;
-    text-transform: uppercase;
-    transition: all 0.3s ease;
-}
-
-.botao-primario {
-    background: linear-gradient(45deg, var(--rosa-neon), var(--laranja-neon));
-    color: var(--texto-brancao);
-    box-shadow: 0 0 20px rgba(255, 0, 127, 0.4);
-}
-
-.botao-secundario {
-    background: transparent;
-    color: var(--azul-neon);
-    border: 2px solid var(--azul-neon);
-}
-
-/* Efeitos Hover nos Botões */
-.botao-primario:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 0 30px var(--rosa-neon);
-}
-
-.botao-secundario:hover {
-    background: var(--azul-neon);
-    color: var(--fundo-principal);
-    box-shadow: 0 0 25px var(--azul-neon);
-    transform: translateY(-4px);
-}
-
-/* =========================================================
-   5. CONTAINER DE SEÇÕES E CARTÕES (GLASSMORPHISM)
-   ========================================================= */
-.secao-container {
-    max-width: 1100px;
-    margin: 60px auto; /* Espaçamento externo e centralização */
-    padding: 0 20px;
-}
-
-.titulo-secao {
-    font-family: var(--fonte-titulo);
-    font-size: 34px;
-    text-align: center; /* Centralizado */
-    color: var(--azul-neon);
-    margin-bottom: 40px;
-    text-shadow: 0 0 12px var(--azul-neon);
-}
-
-.cartao-glass {
-    background: rgba(19, 9, 36, 0.75);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 0, 127, 0.3);
-    border-radius: 20px; /* Cantos arredondados */
-    padding: 35px; /* Espaçamento interno */
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-}
-
-.grid-2-colunas {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 35px;
-    align-items: center;
-}
-
-.texto-secao h2 {
-    font-family: var(--fonte-titulo);
-    font-size: 26px;
-    color: var(--rosa-neon);
-    margin-bottom: 15px;
-}
-
-.texto-secao p {
-    color: var(--texto-suave);
-    font-size: 16px;
-    margin-bottom: 25px;
-    text-align: justify;
-}
-
-.estatisticas {
-    display: flex;
-    justify-content: space-between;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    padding-top: 20px;
-}
-
-.item-estatistica {
-    text-align: center;
-}
-
-.numero-estatistica {
-    display: block;
-    font-family: var(--fonte-titulo);
-    font-size: 26px;
-    color: var(--azul-neon);
-}
-
-.legenda-estatistica {
-    font-size: 13px;
-    color: var(--texto-suave);
-}
-
-.imagem-destaque {
-    width: 100%;
-    height: auto;
-    border-radius: 15px; /* Cantos arredondados */
-    border: 2px solid var(--rosa-neon);
-    box-shadow: 0 0 20px rgba(255, 0, 127, 0.2);
-}
-
-/* =========================================================
-   6. GRADE DE PERSONAGENS
-   ========================================================= */
-.grade-personagens {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-}
-
-.cartao-personagem {
-    background: var(--fundo-painel);
-    border-radius: 18px; /* Cantos arredondados */
-    overflow: hidden;
-    border: 1px solid rgba(0, 240, 255, 0.2);
-    transition: transform 0.3s ease, border-color 0.3s ease;
-}
-
-/* Efeito Hover no Cartão de Personagem */
-.cartao-personagem:hover {
-    transform: translateY(-8px);
-    border-color: var(--rosa-neon);
-    box-shadow: 0 10px 25px rgba(255, 0, 127, 0.3);
-}
-
-.moldura-imagem img {
-    width: 100%;
-    height: 220px;
-    object-fit: cover;
-    display: block;
-}
-
-.info-personagem {
-    padding: 22px; /* Espaçamento interno */
-}
-
-.info-personagem h3 {
-    font-family: var(--fonte-titulo);
-    font-size: 20px;
-    color: var(--rosa-neon);
-    margin-bottom: 10px;
-}
-
-.info-personagem p {
-    font-size: 14px;
-    color: var(--texto-suave);
-}
-
-/* =========================================================
-   7. GALERIA DE IMAGENS
-   ========================================================= */
-.grade-galeria {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 20px;
-}
-
-.item-galeria {
-    position: relative;
-    border-radius: 15px; /* Cantos arredondados */
-    overflow: hidden;
-    border: 1px solid var(--rosa-neon);
-}
-
-.item-galeria img {
-    width: 100%;
-    height: 220px;
-    object-fit: cover;
-    display: block;
-    transition: transform 0.4s ease;
-}
-
-/* Efeito Hover nas Imagens da Galeria */
-.item-galeria:hover img {
-    transform: scale(1.08);
-}
-
-.legenda-hover {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    padding: 12px;
-    background: linear-gradient(transparent, rgba(8, 3, 19, 0.9));
-    font-family: var(--fonte-titulo);
-    font-size: 14px;
-    text-align: center;
-    color: var(--texto-brancao);
-}
-
-/* =========================================================
-   8. CONTAINER DE VÍDEO RESPONSIVO
-   ========================================================= */
-.container-video {
-    position: relative;
-    padding-bottom: 56.25%; /* Proporção 16:9 */
-    height: 0;
-    overflow: hidden;
-    border-radius: 18px;
-    padding-top: 0;
-}
-
-.container-video iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border: 0;
-}
-
-/* =========================================================
-   9. RODAPÉ
-   ========================================================= */
-.rodape {
-    text-align: center; /* Centralizado */
-    padding: 30px 20px;
-    background: #040108;
-    border-top: 1px solid rgba(255, 0, 127, 0.2);
-    color: var(--texto-suave);
-    font-size: 14px;
-    margin-top: 60px;
-}
-
-/* =========================================================
-   10. RESPONSIVIDADE (CELULARES E TABLETS)
-   ========================================================= */
-@media (max-width: 768px) {
-    .cabecalho {
-        padding: 15px 20px;
-    }
-    
-    .menu-navegacao {
-        display: none; /* Esconde menu em telas pequenas para simplicidade */
-    }
-
-    .grid-2-colunas {
-        grid-template-columns: 1fr;
-    }
-
-    .titulo-principal {
-        font-size: 36px;
-    }
-
-    .descricao-hero {
-        font-size: 15px;
-    }
-}
+</body>
+</html>
