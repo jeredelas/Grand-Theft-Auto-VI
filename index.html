@@ -3,26 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Grand Theft Auto VI - Vice City</title>
+    <title>GTA VI - Vice City Database</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div class="container">
-        <h1>Grand Theft Auto VI</h1>
-        
-        <img class="imagem-destaque" src="https://images.alphacoders.com/134/1343003.jpeg" alt="GTA VI Arte Oficial">
-        
-        <p class="descricao">
-            Explore o estado de Leonida e as ruas iluminadas por neon de Vice City. GTA 6 acompanha a jornada de Lucia e Jason em uma história repleta de ação, crime e sobrevivência no submundo de um mapa gigantesco e hiper-realista.
-        </p>
+    <div class="layout">
+        <!-- Barra Lateral de Navegação -->
+        <aside class="sidebar">
+            <div class="brand">GTA <span>VI</span></div>
+            <nav class="nav-links">
+                <a href="#destaque" class="active">Destaque</a>
+                <a href="#personagens">Personagens</a>
+                <a href="#mapa">Mapa</a>
+                <a href="#novidades">Novidades</a>
+            </nav>
+        </aside>
 
-        <div class="galeria">
-            <img src="https://images8.alphacoders.com/134/1343004.jpeg" alt="Vice City Beach">
-            <img src="https://images.alphacoders.com/134/1343005.jpeg" alt="Lucia e Jason">
-        </div>
+        <!-- Conteúdo Principal -->
+        <main class="main-content">
+            
+            <!-- Banner Hero -->
+            <section id="destaque" class="hero-banner">
+                <div class="hero-text">
+                    <span class="tag">Lançamento 2026</span>
+                    <h1>Explore Leonida</h1>
+                    <p>O maior e mais imersivo mundo aberto já criado pela Rockstar Games. Viva a história de Lucia e Jason nas ruas frenéticas de Vice City.</p>
+                    <button class="btn-neon">Explorar Agora</button>
+                </div>
+                <div class="hero-img">
+                    <img src="https://images.alphacoders.com/134/1343003.jpeg" alt="GTA 6 Banner">
+                </div>
+            </section>
 
-        <a href="#" class="botao">Ver Trailer Oficial</a>
+            <!-- Grid de Cards -->
+            <section id="personagens" class="cards-grid">
+                <article class="card">
+                    <img src="https://images8.alphacoders.com/134/1343004.jpeg" alt="Vice City">
+                    <div class="card-info">
+                        <h3>Vice City</h3>
+                        <p>Luzes neon, praias movimentadas e o contraste entre o luxo e o submundo do crime.</p>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <img src="https://images.alphacoders.com/134/1343005.jpeg" alt="Lucia & Jason">
+                    <div class="card-info">
+                        <h3>Lucia & Jason</h3>
+                        <p>Uma dupla dinâmica enfrentando grandes assaltos e desafios no estado de Leonida.</p>
+                    </div>
+                </article>
+            </section>
+
+        </main>
     </div>
 
 </body>
