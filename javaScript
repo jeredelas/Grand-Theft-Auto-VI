@@ -1,16 +1,20 @@
 // =========================================================
-// SINTETIZADOR DE ÁUDIO WEB (SIRENES, BEEP & AMBIÊNCIA)
+// SINTETIZADOR ULTRA-REALISTA DE SIRENE POLICIAL DO GTA
 // =========================================================
 
 let audioCtx = null;
-let oscSiren = null;
-let oscLfo = null;
-let gainSiren = null;
+let sirenOsc1 = null;
+let sirenOsc2 = null;
+let sirenFilter = null;
+let sirenGain = null;
+let sirenInterval = null;
 let oscAmbient = null;
 let gainAmbient = null;
-let somAtivo = false;
 
-// Função para garantir que o AudioContext seja criado e ativado corretamente
+let somAtivo = false;
+let modoSirene = 'WAIL'; // 'WAIL' (Lenta/Cruising) ou 'YELP' (Rápida/Perseguição)
+
+// Garante o AudioContext do navegador
 function obterAudioContext() {
     if (!audioCtx) {
         const AudioContextClass = window.AudioContext || window.webkitAudioContext;
@@ -24,7 +28,7 @@ function obterAudioContext() {
     return audioCtx;
 }
 
-// Destrava o sistema de som do navegador no primeiro clique do usuário na página
+// Destrava áudio na primeira interação do usuário
 function destravarAudio() {
     obterAudioContext();
     document.removeEventListener('click', destravarAudio);
@@ -33,71 +37,128 @@ function destravarAudio() {
 document.addEventListener('click', destravarAudio);
 document.addEventListener('touchstart', destravarAudio);
 
-// 1. Liga / Desliga o Som da Sirene e Ambiência Synthwave
+// Efeito Sonoro: Estalo / Chiado de Rádio Policial (GTA Scanner Chirp)
+function tocarBipRadioPolicia(ctx) {
+    try {
+        let bufferSize = ctx.sampleRate * 0.08; // 80ms de ruído
+        let buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+        let output = buffer.getChannelData(0);
+        for (let i = 0; i < bufferSize; i++) {
+            output[i] = Math.random() * 2 - 1; // Ruído branco
+        }
+
+        let whiteNoise = ctx.createBufferSource();
+        whiteNoise.buffer = buffer;
+
+        let filter = ctx.createBiquadFilter();
+        filter.type = 'bandpass';
+        filter.frequency.value = 2500; // Frequência de rádio comunicador
+
+        let noiseGain = ctx.createGain();
+        noiseGain.gain.setValueAtTime(0.15, ctx.currentTime);
+        noiseGain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.08);
+
+        whiteNoise.connect(filter);
+        filter.connect(noiseGain);
+        noiseGain.connect(ctx.destination);
+
+        whiteNoise.start();
+    } catch (e) {}
+}
+
+// Inicia a Sirene IDÊNTICA à do GTA
 function alternarSomAmbiente() {
     const ctx = obterAudioContext();
-
-    if (!ctx) {
-        alert("Seu navegador não suporta Web Audio API.");
-        return;
-    }
+    if (!ctx) return;
 
     if (!somAtivo) {
         try {
-            // --- A) SIRENE POLICIAL (Oscilador com Variação LFO) ---
-            oscSiren = ctx.createOscillator();
-            oscLfo = ctx.createOscillator();
-            gainSiren = ctx.createGain();
-            let lfoGain = ctx.createGain();
+            // Toca o estalo do rádio policial ao ligar a sirene
+            tocarBipRadioPolicia(ctx);
 
-            oscSiren.type = 'sawtooth';
-            oscSiren.frequency.value = 700; // Frequência audível da sirene
+            // 1. DUAL OSCILLATOR (Simula os dois alto-falantes da grade do carro de polícia)
+            sirenOsc1 = ctx.createOscillator(); // Corneta principal
+            sirenOsc2 = ctx.createOscillator(); // Corneta secundária (defasada)
 
-            oscLfo.type = 'sine';
-            oscLfo.frequency.value = 0.4; // Velocidade da oscilação da sirene
-            lfoGain.gain.value = 300; // Oscila entre 400Hz e 1000Hz
+            sirenOsc1.type = 'sawtooth';
+            sirenOsc2.type = 'square'; // Mistura Sawtooth + Square para som estridente real
 
-            oscLfo.connect(lfoGain);
-            lfoGain.connect(oscSiren.frequency);
+            // 2. FILTRO DE CORNETA (Efeito Megafone/Sirene Eletrônica)
+            sirenFilter = ctx.createBiquadFilter();
+            sirenFilter.type = 'bandpass';
+            sirenFilter.frequency.value = 1150; // Frequência de ressonância da sirene
+            sirenFilter.Q.value = 2.2;          // Projeção focada no alto-falante
 
-            gainSiren.gain.value = 0.15; // Volume AUMENTADO (antes era 0.04)
+            // 3. CONTROLE DE VOLUME
+            sirenGain = ctx.createGain();
+            sirenGain.gain.value = 0.18; // Volume bem audível
 
-            oscSiren.connect(gainSiren);
-            gainSiren.connect(ctx.destination);
+            // Conecta a cadeia de áudio
+            sirenOsc1.connect(sirenFilter);
+            sirenOsc2.connect(sirenFilter);
+            sirenFilter.connect(sirenGain);
+            sirenGain.connect(ctx.destination);
 
-            oscSiren.start();
-            oscLfo.start();
+            const agora = ctx.currentTime;
+            sirenOsc1.start(agora);
+            sirenOsc2.start(agora);
 
-            // --- B) GRAVE SYNTHWAVE DE FUNDO ---
-            oscAmbient = ctx.createOscillator();
-            gainAmbient = ctx.createGain();
+            // Parâmetros da Sirene do GTA (Wail = Lenta / Yelp = Rápida)
+            const minFreq = 620;  // Grave da sirene policial
+            const maxFreq = 1420; // Agudo da sirene policial
+            
+            // Definição dos tempos do ciclo
+            const riseTime = modoSirene === 'WAIL' ? 1.8 : 0.35; // Rampa de subida
+            const fallTime = modoSirene === 'WAIL' ? 1.8 : 0.35; // Rampa de descida
+            const cycleMs = (riseTime + fallTime) * 1000;
 
-            oscAmbient.type = 'sawtooth';
-            oscAmbient.frequency.value = 65; // Nota grave perceptível
-            gainAmbient.gain.value = 0.10;
+            function cicloSireneGta() {
+                if (!somAtivo || !sirenOsc1) return;
+                const t = ctx.currentTime;
 
-            // Filtro Lowpass para deixar o grave aveludado e retrô
-            let filtro = ctx.createBiquadFilter();
-            filtro.type = 'lowpass';
-            filtro.frequency.value = 250;
+                // Corneta 1
+                sirenOsc1.frequency.cancelScheduledValues(t);
+                sirenOsc1.frequency.setValueAtTime(minFreq, t);
+                sirenOsc1.frequency.linearRampToValueAtTime(maxFreq, t + riseTime);
+                sirenOsc1.frequency.linearRampToValueAtTime(minFreq, t + riseTime + fallTime);
 
-            oscAmbient.connect(filtro);
-            filtro.connect(gainAmbient);
-            gainAmbient.connect(ctx.destination);
-
-            oscAmbient.start();
+                // Corneta 2 (Detuned +18Hz para gerar o batimento metálico característico do GTA)
+                sirenOsc2.frequency.cancelScheduledValues(t);
+                sirenOsc2.frequency.setValueAtTime(minFreq + 18, t);
+                sirenOsc2.frequency.linearRampToValueAtTime(maxFreq + 28, t + riseTime);
+                sirenOsc2.frequency.linearRampToValueAtTime(minFreq + 18, t + riseTime + fallTime);
+            }
 
             somAtivo = true;
+            cicloSireneGta();
+            sirenInterval = setInterval(cicloSireneGta, cycleMs);
 
-            // Atualiza visual do botão
+            // 4. GRAVE SYNTHWAVE DE BACKGROUND
+            oscAmbient = ctx.createOscillator();
+            gainAmbient = ctx.createGain();
+            oscAmbient.type = 'sawtooth';
+            oscAmbient.frequency.value = 55; // Nota A1
+            gainAmbient.gain.value = 0.08;
+
+            let filtroGrave = ctx.createBiquadFilter();
+            filtroGrave.type = 'lowpass';
+            filtroGrave.frequency.value = 200;
+
+            oscAmbient.connect(filtroGrave);
+            filtroGrave.connect(gainAmbient);
+            gainAmbient.connect(ctx.destination);
+            oscAmbient.start(agora);
+
+            // Atualiza Interface Visual
             const btn = document.getElementById("btn-som-ambiente");
             const icone = document.getElementById("icone-som");
             if (btn) btn.style.borderColor = "var(--rosa-neon)";
-            if (icone) icone.innerText = "🔇";
+            if (icone) icone.innerText = "🚨";
 
-            console.log("🔊 Sirene e Som Neon LIGADOS!");
+            console.log("🚨 Sirene Policial GTA Ativada (" + modoSirene + ")");
+
         } catch (erro) {
-            console.error("Erro ao tocar áudio:", erro);
+            console.error("Erro ao tocar sirene:", erro);
         }
     } else {
         desativarSomAmbiente();
@@ -105,8 +166,13 @@ function alternarSomAmbiente() {
 }
 
 function desativarSomAmbiente() {
-    if (oscSiren) { try { oscSiren.stop(); oscSiren.disconnect(); } catch(e){} }
-    if (oscLfo) { try { oscLfo.stop(); oscLfo.disconnect(); } catch(e){} }
+    const ctx = obterAudioContext();
+    if (ctx) tocarBipRadioPolicia(ctx); // Estalo de rádio ao desligar
+
+    if (sirenInterval) clearInterval(sirenInterval);
+    if (sirenOsc1) { try { sirenOsc1.stop(); sirenOsc1.disconnect(); } catch(e){} }
+    if (sirenOsc2) { try { sirenOsc2.stop(); sirenOsc2.disconnect(); } catch(e){} }
+    if (sirenFilter) { try { sirenFilter.disconnect(); } catch(e){} }
     if (oscAmbient) { try { oscAmbient.stop(); oscAmbient.disconnect(); } catch(e){} }
 
     somAtivo = false;
@@ -116,16 +182,16 @@ function desativarSomAmbiente() {
     if (btn) btn.style.borderColor = "var(--azul-neon)";
     if (icone) icone.innerText = "🔊";
 
-    console.log("🔇 Som DESLIGADO.");
+    console.log("🔇 Sirene Desligada.");
 }
 
-// Vincula ao botão da barra superior
+// Evento do Botão da Barra Superior
 const btnSom = document.getElementById("btn-som-ambiente");
 if (btnSom) {
     btnSom.addEventListener("click", alternarSomAmbiente);
 }
 
-// 2. Efeito Sonoro (Beep Futurista) ao passar o mouse nos botões
+// Efeito de Beep ao Passar o Mouse nos Botões
 function tocarBeepHover() {
     const ctx = obterAudioContext();
     if (!ctx) return;
@@ -133,19 +199,17 @@ function tocarBeepHover() {
     try {
         let osc = ctx.createOscillator();
         let gain = ctx.createGain();
-
         osc.type = 'sine';
-        osc.frequency.setValueAtTime(800, ctx.currentTime);
-        osc.frequency.exponentialRampToValueAtTime(300, ctx.currentTime + 0.08);
+        osc.frequency.setValueAtTime(900, ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(400, ctx.currentTime + 0.06);
 
-        gain.gain.setValueAtTime(0.08, ctx.currentTime); // Volume audível
-        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.08);
+        gain.gain.setValueAtTime(0.05, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.06);
 
         osc.connect(gain);
         gain.connect(ctx.destination);
-
         osc.start();
-        osc.stop(ctx.currentTime + 0.08);
+        osc.stop(ctx.currentTime + 0.06);
     } catch (e) {}
 }
 
@@ -154,7 +218,7 @@ document.querySelectorAll('.btn-surreal, .menu-navegacao a, .botao-nav-glow').fo
 });
 
 // =========================================================
-// RECURSOS DA PÁGINA (CONTAGEM, MODAL, RÁDIO, VIP)
+// OUTROS RECURSOS DA PÁGINA (CONTAGEM, MODAL, RÁDIO, VIP)
 // =========================================================
 
 // Contagem Regressiva
@@ -176,7 +240,7 @@ setInterval(function() {
     document.getElementById("segundos").innerText = segundos < 10 ? "0" + segundos : segundos;
 }, 1000);
 
-// Barra de Progresso
+// Barra de Progresso de Rolagem
 window.onscroll = function() {
     const barra = document.getElementById("barra-progresso");
     if (!barra) return;
@@ -203,7 +267,7 @@ if (modal && imgModal) {
     modal.onclick = function(e) { if(e.target === modal) modal.style.display = "none"; }
 }
 
-// Widget de Rádio
+// Widget de Rádio Vice City
 const estacoes = [
     "Estação: Wave 103 (Synthwave)",
     "Estação: Flash FM (Hits Pop 80s)",
